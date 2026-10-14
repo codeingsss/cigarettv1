@@ -1,10 +1,5 @@
-
 --========================================================================
 --  Roblox Executor Client
---  - ESP rate adjustable (server controlled)
---  - Aim Assist (spring smoothing)
---  - Aimlock (instant / humanized)
---  - FOV up to 360
 --========================================================================
 
 local HTTP_HOST = "http://127.0.0.1:2026"
@@ -28,11 +23,8 @@ local HttpService = game:GetService("HttpService")
 local LocalPlayer = Players.LocalPlayer
 local Camera      = Workspace.CurrentCamera
 
---========================================================================
---  Config
---========================================================================
 local CFG = {
-    ESP_RATE_HZ  = 60,
+    ESP_RATE_HZ  = 20,
     ESP_MAX_DIST = 500,
 }
 
@@ -54,7 +46,7 @@ local AIM = {
     fov           = 25,
     maxDist       = 150,
     bone          = "Head",
-    minTargetDist = 2.0,
+    minTargetDist = 5.0,    -- ★ 3.0 → 5.0
 }
 
 --========================================================================
@@ -78,20 +70,22 @@ local function isVisible(part)
 end
 
 --========================================================================
---  ESP (rate adjustable)
+--  ESP
 --========================================================================
 local function collectESP()
     local list = {}
     local myPos  = Camera.CFrame.Position
     local myName = LocalPlayer.Name
     local myChar = LocalPlayer.Character
+    local myUid  = LocalPlayer.UserId
 
     for _, plr in ipairs(Players:GetPlayers()) do
-        if plr ~= LocalPlayer
-           and plr.Name ~= myName
-           and plr.Character
-           and plr.Character ~= myChar then
+        local isSelf = (plr == LocalPlayer)
+                    or (plr.Name == myName)
+                    or (plr.Character == myChar)
+                    or (plr.UserId == myUid)
 
+        if not isSelf and plr.Character then
             local hrp = plr.Character:FindFirstChild("HumanoidRootPart")
             local hum = plr.Character:FindFirstChildOfClass("Humanoid")
             if hrp and hum and hum.Health > 0 then
@@ -116,13 +110,13 @@ local espAccum = 0
 RunService.Heartbeat:Connect(function(dt)
     local rate = math.max(CFG.ESP_RATE_HZ, 1)
     local interval = 1 / rate
-
     espAccum = espAccum + dt
     if espAccum < interval then return end
     espAccum = 0
 
+    local players = collectESP()
     local ok, payload = pcall(function()
-        return HttpService:JSONEncode({ get = "esp", players = collectESP() })
+        return HttpService:JSONEncode({ get = "esp", players = players })
     end)
     if ok then
         pcall(function()
@@ -137,10 +131,10 @@ RunService.Heartbeat:Connect(function(dt)
 end)
 
 --========================================================================
---  Server polling
+--  폴링
 --========================================================================
 task.spawn(function()
-    while task.wait(0.1) do
+    while task.wait(0.5) do
         local ok, res = pcall(function()
             return http_request({
                 Url = HTTP_HOST .. "/aim_poll",
@@ -158,14 +152,12 @@ task.spawn(function()
                 if data.assist_smooth   ~= nil then AIM.assist_smooth   = data.assist_smooth   end
                 if data.assist_jitter   ~= nil then AIM.assist_jitter   = data.assist_jitter   end
                 if data.assist_humanize ~= nil then AIM.assist_humanize = data.assist_humanize end
-
                 if data.lock_enabled  ~= nil then AIM.lock_enabled  = data.lock_enabled  end
                 if data.lock_humanize ~= nil then AIM.lock_humanize = data.lock_humanize end
                 if data.lock_jitter   ~= nil then AIM.lock_jitter   = data.lock_jitter   end
                 if data.lock_smooth   ~= nil then AIM.lock_smooth   = data.lock_smooth   end
                 if data.lock_reactMin ~= nil then AIM.lock_reactMin = data.lock_reactMin end
                 if data.lock_reactMax ~= nil then AIM.lock_reactMax = data.lock_reactMax end
-
                 if data.visible  ~= nil then AIM.visible  = data.visible  end
                 if data.hold_rmb ~= nil then AIM.hold_rmb = data.hold_rmb end
                 if data.fov      ~= nil then AIM.fov      = data.fov      end
@@ -173,7 +165,6 @@ task.spawn(function()
             end
         end
 
-        -- ESP config polling (rate_hz 반영)
         local ok2, res2 = pcall(function()
             return http_request({
                 Url = HTTP_HOST .. "/esp_config",
@@ -231,6 +222,7 @@ local function isInFov(part)
 end
 
 local currentTarget = nil
+local lastTarget    = nil
 local nextReacquire = 0
 local reactDelayUntil = 0
 
@@ -239,20 +231,23 @@ local function pickTarget()
     local myPos  = Camera.CFrame.Position
     local myName = LocalPlayer.Name
     local myChar = LocalPlayer.Character
+    local myUid  = LocalPlayer.UserId
 
     for _, plr in ipairs(Players:GetPlayers()) do
-        if plr ~= LocalPlayer
-           and plr.Name ~= myName
-           and plr.Character
-           and plr.Character ~= myChar then
+        local isSelf = (plr == LocalPlayer)
+                    or (plr.Name == myName)
+                    or (plr.Character == myChar)
+                    or (plr.UserId == myUid)
 
+        if not isSelf and plr.Character then
             local part = plr.Character:FindFirstChild(AIM.bone)
             local hum  = plr.Character:FindFirstChildOfClass("Humanoid")
-
             if part and hum and hum.Health > 0 then
                 local dist = (part.Position - myPos).Magnitude
+                -- ★ 5m 이상만 조준
                 if dist >= AIM.minTargetDist and dist <= AIM.maxDist then
-                    if not (myChar and part:IsDescendantOf(myChar)) then
+                    local isMyPart = myChar and part:IsDescendantOf(myChar)
+                    if not isMyPart then
                         if isInFov(part) and isVisible(part) then
                             local score = dist
                             if AIM.fov < 180 then
@@ -324,12 +319,14 @@ RunService:BindToRenderStep("AimCamera",
             aimState.initialized = false
             smoothTargetPos = nil
             lockSmoothPos   = nil
+            lastTarget      = nil
         end
 
         if not anyActive then
             aimState.initialized = false
             smoothTargetPos = nil
             lockSmoothPos   = nil
+            lastTarget      = nil
             return
         end
 
@@ -348,7 +345,6 @@ RunService:BindToRenderStep("AimCamera",
             local hadTarget = currentTarget ~= nil
             currentTarget = pickTarget()
             nextReacquire = now + reacquireInterval
-
             if currentTarget and not hadTarget then
                 if lockActive and AIM.lock_humanize then
                     local rmin = AIM.lock_reactMin or 0.02
@@ -358,6 +354,22 @@ RunService:BindToRenderStep("AimCamera",
             end
         end
 
+        -- ★ 본인 캐릭터 파츠면 타겟/캐시 전부 리셋
+        local myChar = LocalPlayer.Character
+        if currentTarget and myChar and currentTarget:IsDescendantOf(myChar) then
+            currentTarget   = nil
+            lockSmoothPos   = nil
+            smoothTargetPos = nil
+            lastTarget      = nil
+        end
+
+        -- ★ 타겟 바뀌면 캐시 리셋 (부드러운 이동 방지)
+        if currentTarget ~= lastTarget then
+            lastTarget      = currentTarget
+            lockSmoothPos   = nil
+            smoothTargetPos = nil
+        end
+
         if not currentTarget then
             aimState.velYaw   = aimState.velYaw   * 0.85
             aimState.velPitch = aimState.velPitch * 0.85
@@ -365,7 +377,6 @@ RunService:BindToRenderStep("AimCamera",
             aimState.curPitch = math.clamp(
                 aimState.curPitch + aimState.velPitch * dt,
                 -math.rad(85), math.rad(85))
-
             local camPos = Camera.CFrame.Position
             Camera.CFrame = yawPitchToCFrame(camPos,
                                              aimState.curYaw, aimState.curPitch)
@@ -374,12 +385,10 @@ RunService:BindToRenderStep("AimCamera",
 
         local camPos = Camera.CFrame.Position
 
-        -- Aimlock
         if lockActive then
             if AIM.lock_humanize and now < reactDelayUntil then
                 return
             end
-
             local rawPos = currentTarget.Position
             if lockSmoothPos == nil then
                 lockSmoothPos = rawPos
@@ -387,7 +396,6 @@ RunService:BindToRenderStep("AimCamera",
                 local alpha = AIM.lock_humanize and 0.35 or 1.0
                 lockSmoothPos = lockSmoothPos:Lerp(rawPos, alpha)
             end
-
             local targetDir = lockSmoothPos - camPos
             if targetDir.Magnitude <= 0.001 then return end
             targetDir = targetDir.Unit
@@ -428,7 +436,6 @@ RunService:BindToRenderStep("AimCamera",
             return
         end
 
-        -- Aim Assist
         if assistActive then
             local rawPos = currentTarget.Position
             if smoothTargetPos == nil then
@@ -436,7 +443,6 @@ RunService:BindToRenderStep("AimCamera",
             else
                 smoothTargetPos = smoothTargetPos:Lerp(rawPos, 0.25)
             end
-
             local targetDir = smoothTargetPos - camPos
             if targetDir.Magnitude <= 0.001 then return end
             targetDir = targetDir.Unit
@@ -478,4 +484,4 @@ RunService:BindToRenderStep("AimCamera",
     end
 )
 
-print("[CLIENT] ESP + Aim Assist + Aimlock + Rate slider loaded")
+print("[CLIENT] Loaded")
