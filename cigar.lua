@@ -1,8 +1,8 @@
 --========================================================================
---  Roblox Client - CIGARETTE V3.3 (팀체크 전면 수정 + 전 기능 방어)
---  - TeamColor: Enum.TeamColor 대신 BrickColor.Number 사용
---  - 모든 팀체크 / ESP / Aim 경로에 pcall 방어
---  - refreshTeamCache 는 ts 를 먼저 갱신해 스팸 원천차단
+--  Roblox Client - CIGARETTE V3.3 (TeamCheck overhaul + full protection)
+--  - TeamColor: Using BrickColor.Number instead of Enum.TeamColor
+--  - pcall protection on all TeamCheck / ESP / Aim paths
+--  - refreshTeamCache updates ts first to block spam
 --========================================================================
 
 local HTTP_HOST = "http://127.0.0.1:2026"
@@ -12,7 +12,6 @@ local http_request =
     (http and http.request) or
     (fluxus and fluxus.request) or
     (Krnl and Krnl.request) or
-    http_request or
     request
 
 assert(http_request, "Executor does not support HTTP requests.")
@@ -119,7 +118,7 @@ local mousemoverel_fn =
     MouseMove
 
 if not mousemoverel_fn then
-    warn("[CIGAR] mousemoverel 익스큐터 미지원 - aim 비활성화")
+    warn("[CIGAR] mousemoverel not supported by executor - aim disabled")
 end
 
 --========================================================================
@@ -162,7 +161,7 @@ local function isSelf(plr)
 end
 
 --========================================================================
---  ★ TEAM CHECK (전면 재작성 - BrickColor 기반)
+--  TEAM CHECK (Based on BrickColor)
 --========================================================================
 local TEAM_HINT = {"team", "faction", "side", "role", "class", "division", "squad"}
 local function isTeamishName(n)
@@ -178,7 +177,7 @@ local function collectTeamKeys(plr)
     local keys = {}
     if not plr then return keys end
 
-    -- 1) Team object (가장 신뢰)
+    -- 1) Team object (Most reliable)
     pcall(function()
         local t = plr.Team
         if t and t.Name then
@@ -186,20 +185,19 @@ local function collectTeamKeys(plr)
         end
     end)
 
-    -- 2) TeamColor (BrickColor - Enum.TeamColor 절대 사용 금지)
+    -- 2) TeamColor (BrickColor - NEVER use Enum.TeamColor)
     pcall(function()
         local tc = plr.TeamColor
         if tc and typeof(tc) == "BrickColor" then
             local num = tc.Number
             local name = tc.Name
-            -- Number 1 = White, Name "Custom" = 팀 구분 아님
             if num and num ~= 1 and name ~= "Custom" then
                 keys["TEAMCOLOR:" .. tostring(num)] = true
             end
         end
     end)
 
-    -- 3) Player attributes (team-ish 이름만)
+    -- 3) Player attributes (team-ish names only)
     pcall(function()
         for _, attr in ipairs(plr:GetAttributes()) do
             if isTeamishName(attr) then
@@ -211,7 +209,7 @@ local function collectTeamKeys(plr)
         end
     end)
 
-    -- 4) Player children ValueBase (team-ish 이름만)
+    -- 4) Player children ValueBase (team-ish names only)
     pcall(function()
         for _, child in ipairs(plr:GetChildren()) do
             if child:IsA("ValueBase") and isTeamishName(child.Name) then
@@ -238,7 +236,7 @@ local function collectTeamKeys(plr)
         end
     end)
 
-    -- 6) Character attributes (team-ish 이름만)
+    -- 6) Character attributes (team-ish names only)
     pcall(function()
         if plr.Character then
             for _, attr in ipairs(plr.Character:GetAttributes()) do
@@ -258,7 +256,7 @@ end
 local _teamCache = { ts = 0, validKeys = {}, allKeys = {}, myKeys = {} }
 
 local function refreshTeamCache()
-    -- ★ 먼저 ts 갱신: 안에서 뭐 터져도 1.5초간 재시도 안 함 → 스팸 원천차단
+    -- Update ts first: if it errors, no retry for 1.5s -> blocks spam
     _teamCache.ts = tick()
 
     pcall(function()
@@ -298,31 +296,7 @@ local function isTeammate(plr)
     if not me then return false end
     if plr == me or plr.UserId == me.UserId then return true end
 
-    -- 1순위: Team object 양쪽 다 있으면 확정
-    local ok1, result = pcall(function()
-        local myTeam    = me.Team
-        local theirTeam = plr.Team
-        if myTeam and theirTeam then
-            return myTeam == theirTeam, true  -- (값, 확정여부)
-        end
-        if myTeam and not theirTeam then return false, true end
-        if theirTeam and not myTeam then return false, true end
-        return false, false
-    end)
-    if ok1 and result then
-        local mate, decided = pcall(function()
-            local myTeam, theirTeam = me.Team, plr.Team
-            if myTeam and theirTeam then return myTeam == theirTeam, true end
-            if myTeam and not theirTeam then return false, true end
-            if theirTeam and not myTeam then return false, true end
-            return false, false
-        end)
-        if mate and decided then
-            -- 위 pcall 이 두 값 반환 → 여기 도달 안 함
-        end
-    end
-
-    -- 명확하게 Team 객체 판정 (pcall 두 개 값 반환 받기)
+    -- Priority 1: If both have Team objects, definitive
     local ok2, a, b = pcall(function()
         local myTeam, theirTeam = me.Team, plr.Team
         if myTeam and theirTeam then return myTeam == theirTeam, true end
@@ -332,7 +306,7 @@ local function isTeammate(plr)
     end)
     if ok2 and b then return a == true end
 
-    -- 2순위: 스마트 매칭 (캐시 사용)
+    -- Priority 2: Smart matching (using cache)
     if tick() - _teamCache.ts > 1.5 then
         refreshTeamCache()
     end
@@ -412,7 +386,7 @@ local function targetAlive(part)
 end
 
 --========================================================================
---  Head Hitbox 확장
+--  Head Hitbox Expand
 --========================================================================
 local headExpandOriginals = {}
 
@@ -1040,7 +1014,7 @@ UIS.InputEnded:Connect(function(input)
 end)
 
 --========================================================================
---  AIM LOOP (pcall 전체 방어)
+--  AIM LOOP
 --========================================================================
 local lastActive = false
 local currentTarget = nil
@@ -1194,4 +1168,4 @@ RunService:BindToRenderStep("CigarAimCamera",
     end
 )
 
-print("[CLIENT] CIGARETTE V3.3 loaded (팀체크/ESP/Aim 전면 방어)")
+print("[CLIENT] CIGARETTE V3.3 loaded")
