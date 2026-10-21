@@ -1,1 +1,1197 @@
-local obf_stringchar=string.char;local obf_stringbyte=string.byte;local obf_stringsub=string.sub;local obf_bitlib=bit32 or bit ;local obf_XOR=obf_bitlib.bxor;local obf_tableconcat=table.concat;local obf_tableinsert=table.insert;local function LUAOBFUSACTOR_DECRYPT_STR_0(LUAOBFUSACTOR_STR,LUAOBFUSACTOR_KEY) local result={};for i=1, #LUAOBFUSACTOR_STR do obf_tableinsert(result,obf_stringchar(obf_XOR(obf_stringbyte(obf_stringsub(LUAOBFUSACTOR_STR,i,i + 1 )),obf_stringbyte(obf_stringsub(LUAOBFUSACTOR_KEY,1 + (i% #LUAOBFUSACTOR_KEY) ,1 + (i% #LUAOBFUSACTOR_KEY) + 1 )))%256 ));end return obf_tableconcat(result);end local obf_stringmatch=string.match;local obf_tonumber=tonumber;local obf_pcall=pcall;local function obf_adjnqwidqwjhdpoq() local function obf_wrapperfunc(obf_arg) if obf_arg then local HTTP_HOST=LUAOBFUSACTOR_DECRYPT_STR_0("\91\222\100\10\103\26\252\2\152\39\84\109\27\227\29\155\42\72\109\7\229","\211\51\170\16\122\93\53");local http_request=(syn and syn.request) or (http and http.request) or (fluxus and fluxus.request) or (Krnl and Krnl.request) or http_request or request ;assert(http_request,LUAOBFUSACTOR_DECRYPT_STR_0("\222\182\183\43\238\186\189\58\187\170\189\45\232\238\188\39\239\238\161\61\235\190\189\58\239\238\154\28\207\158\242\58\254\191\167\45\232\186\161\102","\72\155\206\210"));if getgenv()._cigar_stop then pcall(function() getgenv()._cigar_stop();end);end local _my_stop=false;getgenv()._cigar_stop=function() _my_stop=true;end;local LOADER_URL=HTTP_HOST   .. LUAOBFUSACTOR_DECRYPT_STR_0("\9\105\87\28\58\86\110","\83\38\26\52\110") ;local function selfRequeue() local FlatIdent_8D327=0;local code;while true do if (FlatIdent_8D327==0) then code=string.format('loadstring(game:HttpGet("%s"))()',LOADER_URL);if queue_on_teleport then local FlatIdent_66556=0;while true do if (FlatIdent_66556==0) then pcall(queue_on_teleport,code);return true;end end end FlatIdent_8D327=1;end if (FlatIdent_8D327==1) then local FlatIdent_8D327=0;while true do if (FlatIdent_8D327==0) then if queueonteleport then local FlatIdent_67C40=0;local FlatIdent_2FBEB;while true do if (FlatIdent_67C40==0) then FlatIdent_2FBEB=0;while true do if (FlatIdent_2FBEB==0) then local FlatIdent_89ECE=0;while true do if (FlatIdent_89ECE==0) then pcall(queueonteleport,code);return true;end end end end break;end end end if (syn and syn.queue_on_teleport) then pcall(syn.queue_on_teleport,code);return true;end FlatIdent_8D327=1;end if (FlatIdent_8D327==1) then FlatIdent_8D327=2;break;end end end if (FlatIdent_8D327==2) then local FlatIdent_2661B=0;while true do if (FlatIdent_2661B==0) then if (fluxus and fluxus.queue_on_teleport) then local FlatIdent_475BC=0;local FlatIdent_8D83D;while true do if (FlatIdent_475BC==0) then FlatIdent_8D83D=0;while true do if (FlatIdent_8D83D==0) then pcall(fluxus.queue_on_teleport,code);return true;end end break;end end end return false;end end end end end if selfRequeue() then print(LUAOBFUSACTOR_DECRYPT_STR_0("\99\52\14\97\121\37\26\6\89\2\51\73\21\5\34\87\77\18\50\67\24\56\9","\38\56\119\71"));end local Players=game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\195\227\89\207\32\68\224","\54\147\143\56\182\69"));local Workspace=game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\225\142\237\66\204\198\128\252\76","\191\182\225\159\41"));local RunService=game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\25\7\38\102\142\149\212\34\17\45","\162\75\114\72\53\235\231"));local UIS=game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\185\47\65\240\122\12\156\41\80\209\86\16\154\53\71\231","\98\236\92\36\130\51"));local HttpService=game:GetService(LUAOBFUSACTOR_DECRYPT_STR_0("\140\13\24\170\118\173\167\38\173\26\9","\80\196\121\108\218\37\200\213"));local LocalPlayer=Players.LocalPlayer;local Camera=Workspace.CurrentCamera;local CFG={[LUAOBFUSACTOR_DECRYPT_STR_0("\37\64\50\64\121\47\190\37\76\42\69","\234\96\19\98\31\43\110")]=30,[LUAOBFUSACTOR_DECRYPT_STR_0("\35\44\98\248\129\83\179\57\59\123\244\152","\235\102\127\50\167\204\18")]=500,[LUAOBFUSACTOR_DECRYPT_STR_0("\120\136\193\1\107\22\111\142\219","\78\48\193\149\67\36")]=false,[LUAOBFUSACTOR_DECRYPT_STR_0("\24\55\180\58\110\8\33\179\59\96\28\59","\33\80\126\224\120")]=2.5};local TEAM_CHECK=true;local AIM={[LUAOBFUSACTOR_DECRYPT_STR_0("\237\187\16\205\79\248\151\6\202\93\238\164\6\192","\60\140\200\99\164")]=false,[LUAOBFUSACTOR_DECRYPT_STR_0("\134\231\23\47\177\147\203\23\43\173\136\224\12","\194\231\148\100\70")]=0.45,[LUAOBFUSACTOR_DECRYPT_STR_0("\71\95\210\170\229\220\121\70\200\183\226\205\84","\168\38\44\161\195\150")]=0.05,[LUAOBFUSACTOR_DECRYPT_STR_0("\129\239\145\127\35\252\137\30\149\241\131\120\57\242\179","\118\224\156\226\22\80\136\214")]=false,[LUAOBFUSACTOR_DECRYPT_STR_0("\67\253\74\137\81\250\102\134\77\248","\224\34\142\57")]=25,[LUAOBFUSACTOR_DECRYPT_STR_0("\223\180\214\212\96\229\98\3\223\191\193\212\96\229","\110\190\199\165\189\19\145\61")]=150,[LUAOBFUSACTOR_DECRYPT_STR_0("\219\248\100\225\152\211\229\248\103\237\142\195\229\230\126\230","\167\186\139\23\136\235")]=0.8,[LUAOBFUSACTOR_DECRYPT_STR_0("\27\166\155\4\9\161\183\30\10\176\141\9\37\184\137\21","\109\122\213\232")]=1.5,[LUAOBFUSACTOR_DECRYPT_STR_0("\239\228\177\57\253\227\157\35\254\242\167\52\209\225\163\34","\80\142\151\194")]=1.2,[LUAOBFUSACTOR_DECRYPT_STR_0("\15\201\116\71\60\195\121\77\1\202\114\72","\44\99\166\23")]=false,[LUAOBFUSACTOR_DECRYPT_STR_0("\112\248\42\61\12\172\105\250\40\56\58\190\121","\196\28\151\73\86\83")]=true,[LUAOBFUSACTOR_DECRYPT_STR_0("\255\12\42\27\189\82\17\98\231\6\59","\22\147\99\73\112\226\56\120")]=0.15,[LUAOBFUSACTOR_DECRYPT_STR_0("\180\122\225\254\178\171\120\237\250\153\176","\237\216\21\130\149")]=0.85,[LUAOBFUSACTOR_DECRYPT_STR_0("\142\65\92\84\143\207\81\148","\62\226\46\63\63\208\169")]=25,[LUAOBFUSACTOR_DECRYPT_STR_0("\233\22\86\136\32\0\46\70\225\16\70\151","\62\133\121\53\227\127\109\79")]=150,[LUAOBFUSACTOR_DECRYPT_STR_0("\28\27\49\254\233\189\178\21\17\54\202\219\167\172","\194\112\116\82\149\182\206")]=0.8,[LUAOBFUSACTOR_DECRYPT_STR_0("\53\167\79\19\255\241\30\60\173\72\39\205\227\22","\110\89\200\44\120\160\130")]=1.5,[LUAOBFUSACTOR_DECRYPT_STR_0("\167\204\72\77\124\89\43\72\174\199\116\80\66\88","\45\203\163\43\38\35\42\91")]=1.2,[LUAOBFUSACTOR_DECRYPT_STR_0("\222\138\223\40\184\187\81\211\134\200\28\138\160\90","\52\178\229\188\67\231\201")]=0.15,[LUAOBFUSACTOR_DECRYPT_STR_0("\45\78\83\15\200\78\38\32\66\68\59\250\93\59","\67\65\33\48\100\151\60")]=0.35,[LUAOBFUSACTOR_DECRYPT_STR_0("\204\238\162\221\253\203\216\171\214\242\221\235\171\220","\147\191\135\206\184")]=false,[LUAOBFUSACTOR_DECRYPT_STR_0("\151\33\170\196\214\71\141\134\39\168\196","\210\228\72\198\161\184\51")]=LUAOBFUSACTOR_DECRYPT_STR_0("\30\76\242\20","\174\86\41\147\112\19"),[LUAOBFUSACTOR_DECRYPT_STR_0("\72\9\129\14\43\27\46\184\79\18\136\5\34\27\25","\203\59\96\237\107\69\111\113")]=0.5,[LUAOBFUSACTOR_DECRYPT_STR_0("\55\31\160\228\63\228\232\55\27\163\238\37\248","\183\68\118\204\129\81\144")]=0.7,[LUAOBFUSACTOR_DECRYPT_STR_0("\29\164\124\225\5\150\49\165\101\233\10\140\7\183\117","\226\110\205\16\132\107")]=true,[LUAOBFUSACTOR_DECRYPT_STR_0("\248\202\236\220\79\255\252\230\214\87","\33\139\163\128\185")]=90,[LUAOBFUSACTOR_DECRYPT_STR_0("\68\81\8\219\89\76\59\211\94\86\0\215\68\76","\190\55\56\100")]=5,[LUAOBFUSACTOR_DECRYPT_STR_0("\69\166\48\27\29\247\204\91\174\36\26\26\240\231","\147\54\207\92\126\115\131")]=500,[LUAOBFUSACTOR_DECRYPT_STR_0("\27\56\38\116\15\114\8","\30\109\81\85\29\109")]=true,[LUAOBFUSACTOR_DECRYPT_STR_0("\247\126\88\178\9\204\241\253","\156\159\17\52\214\86\190")]=false,[LUAOBFUSACTOR_DECRYPT_STR_0("\168\224\171","\220\206\143\221")]=25,[LUAOBFUSACTOR_DECRYPT_STR_0("\139\124\53\40\220\197\193\146","\178\230\29\77\119\184\172")]=150,[LUAOBFUSACTOR_DECRYPT_STR_0("\247\177\4\30","\152\149\222\106\123\23")]=LUAOBFUSACTOR_DECRYPT_STR_0("\245\35\247\71","\213\189\70\150\35"),[LUAOBFUSACTOR_DECRYPT_STR_0("\66\92\122\60\78\71\115\13\91\113\125\27\91","\104\47\53\20")]=1.5,[LUAOBFUSACTOR_DECRYPT_STR_0("\171\89\140\29\178\6\185\73\190\16\185\25\166\64","\111\195\44\225\124\220")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\218\73\4\106\148\170\209\75","\203\184\38\96\19\203")]=true,[LUAOBFUSACTOR_DECRYPT_STR_0("\45\97\124\76\193\43\76\124\79\207\59\127\124\69","\174\89\19\25\33")]=true,[LUAOBFUSACTOR_DECRYPT_STR_0("\59\0\87\67\248\149\52\38\28\70\75\249\148\2\59\11","\107\79\114\50\46\151\231")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\49\163\180\45\181\60\175\208\56\168\177\22\143\55\182\194\53\163\177","\160\89\198\213\73\234\89\215")]=false,[LUAOBFUSACTOR_DECRYPT_STR_0("\64\116\181\250\250\77\105\164\255\203\76\78\167\253\196\68\116","\165\40\17\212\158")]=6,[LUAOBFUSACTOR_DECRYPT_STR_0("\228\204\28\60\46\224\216\12\12\35\235\216\10\63\35\225","\70\133\185\104\83")]=false,[LUAOBFUSACTOR_DECRYPT_STR_0("\5\80\80\37\193\1\68\64\21\207\11\83","\169\100\37\36\74")]=90,[LUAOBFUSACTOR_DECRYPT_STR_0("\1\146\182\95\8\130\163\84\63\138\163\72\4\142\177\68","\48\96\231\194")]=500};local mousemoverel_fn=(syn and syn.mousemoverel) or (fluxus and fluxus.mousemoverel) or (Krnl and Krnl.mousemoverel) or (getgenv and getgenv().mousemoverel) or mousemoverel or MouseMove ;if  not mousemoverel_fn then warn("[CIGAR] mousemoverel 익스큐터 미지원 - aim 비활성화");end local function worldToScreen(worldPos) local FlatIdent_60EA1=0;local sp;while true do if (FlatIdent_60EA1==1) then return {x=math.floor(sp.X),y=math.floor(sp.Y)};end if (FlatIdent_60EA1==0) then sp=Camera:WorldToViewportPoint(worldPos);if (sp.Z<=0) then return nil;end FlatIdent_60EA1=1;end end end local _rayParams=RaycastParams.new();_rayParams.FilterType=Enum.RaycastFilterType.Exclude;local function isVisible(part) local FlatIdent_8F047=0;local FlatIdent_1743D;local ok;local res;while true do if (FlatIdent_8F047==0) then FlatIdent_1743D=0;ok=nil;FlatIdent_8F047=1;end if (FlatIdent_8F047==1) then res=nil;while true do local FlatIdent_6FA1=0;while true do if (0==FlatIdent_6FA1) then if (FlatIdent_1743D==0) then if  not AIM.visible then return true;end ok,res=pcall(function() local FlatIdent_25011=0;local myChar;local hit;while true do if (FlatIdent_25011==0) then local FlatIdent_61B23=0;while true do if (FlatIdent_61B23==0) then myChar=LocalPlayer and LocalPlayer.Character ;_rayParams.FilterDescendantsInstances=(myChar and {myChar,Camera}) or {Camera} ;FlatIdent_61B23=1;end if (FlatIdent_61B23==1) then FlatIdent_25011=1;break;end end end if (FlatIdent_25011==1) then hit=Workspace:Raycast(Camera.CFrame.Position,part.Position-Camera.CFrame.Position ,_rayParams);return (hit==nil) or hit.Instance:IsDescendantOf(part.Parent) ;end end end);FlatIdent_1743D=1;end if (FlatIdent_1743D==1) then return (ok and res) or true ;end break;end end end break;end end end local function isSelf(plr) local FlatIdent_1076E=0;local me;local ok;while true do if (1==FlatIdent_1076E) then local FlatIdent_946F=0;while true do if (FlatIdent_946F==0) then if  not me then return true;end if ((plr==me) or (plr.UserId==me.UserId)) then return true;end FlatIdent_946F=1;end if (FlatIdent_946F==1) then FlatIdent_1076E=2;break;end end end if (FlatIdent_1076E==2) then local FlatIdent_49AED=0;while true do if (FlatIdent_49AED==0) then ok=pcall(function() if (plr.Character and me.Character) then if (plr.Character==me.Character) then return true;end if plr.Character:IsDescendantOf(me.Character) then return true;end if me.Character:IsDescendantOf(plr.Character) then return true;end end end);return (ok and true) or false ;end end end if (FlatIdent_1076E==0) then local FlatIdent_99389=0;while true do if (FlatIdent_99389==1) then FlatIdent_1076E=1;break;end if (FlatIdent_99389==0) then if  not plr then return true;end me=LocalPlayer;FlatIdent_99389=1;end end end end end local TEAM_HINT={LUAOBFUSACTOR_DECRYPT_STR_0("\220\95\15\32","\227\168\58\110\77\121\184\207"),LUAOBFUSACTOR_DECRYPT_STR_0("\125\61\188\84\184\212\127","\197\27\92\223\32\209\187\17"),LUAOBFUSACTOR_DECRYPT_STR_0("\16\86\199\254","\155\99\63\163"),LUAOBFUSACTOR_DECRYPT_STR_0("\144\222\173\136","\228\226\177\193\237\217"),LUAOBFUSACTOR_DECRYPT_STR_0("\55\188\34\245\39","\134\84\208\67"),LUAOBFUSACTOR_DECRYPT_STR_0("\23\165\144\85\0\165\137\82","\60\115\204\230"),LUAOBFUSACTOR_DECRYPT_STR_0("\244\43\254\113\227","\16\135\90\139")};local function isTeamishName(n) local FlatIdent_1BCFB=0;local nl;while true do local FlatIdent_7A75F=0;while true do if (FlatIdent_7A75F==0) then if (FlatIdent_1BCFB==1) then local FlatIdent_1B1BA=0;while true do if (FlatIdent_1B1BA==0) then for _,h in ipairs(TEAM_HINT) do if nl:find(h,1,true) then return true;end end return false;end end end if (FlatIdent_1BCFB==0) then local FlatIdent_380E8=0;while true do if (FlatIdent_380E8==0) then if (type(n)~=LUAOBFUSACTOR_DECRYPT_STR_0("\71\96\20\58\64\83","\24\52\20\102\83\46\52")) then return false;end nl=n:lower();FlatIdent_380E8=1;end if (FlatIdent_380E8==1) then FlatIdent_1BCFB=1;break;end end end break;end end end end local function collectTeamKeys(plr) local FlatIdent_39EBF=0;local FlatIdent_27957;local keys;while true do if (FlatIdent_39EBF==0) then FlatIdent_27957=0;keys=nil;FlatIdent_39EBF=1;end if (1==FlatIdent_39EBF) then while true do local FlatIdent_494DF=0;while true do if (FlatIdent_494DF==2) then if (FlatIdent_27957==1) then local FlatIdent_2F37F=0;while true do if (FlatIdent_2F37F==1) then FlatIdent_27957=2;break;end if (FlatIdent_2F37F==0) then pcall(function() local FlatIdent_6A83E=0;local t;while true do if (FlatIdent_6A83E==0) then t=plr.Team;if (t and t.Name) then keys[LUAOBFUSACTOR_DECRYPT_STR_0("\240\10\0\9\32\230\5\123","\111\164\79\65\68")   .. tostring(t.Name) ]=true;end break;end end end);pcall(function() local FlatIdent_5F1CB=0;local FlatIdent_2D2B8;local tc;while true do if (FlatIdent_5F1CB==0) then FlatIdent_2D2B8=0;tc=nil;FlatIdent_5F1CB=1;end if (FlatIdent_5F1CB==1) then while true do if (FlatIdent_2D2B8==0) then tc=plr.TeamColor;if (tc and (typeof(tc)==LUAOBFUSACTOR_DECRYPT_STR_0("\228\203\138\221\37\201\201\213\140\204","\138\166\185\227\190\78"))) then local FlatIdent_E0D0=0;local num;local name;while true do if (FlatIdent_E0D0==0) then num=tc.Number;name=tc.Name;FlatIdent_E0D0=1;end if (FlatIdent_E0D0==1) then if (num and (num~=1) and (name~=LUAOBFUSACTOR_DECRYPT_STR_0("\232\97\214\35\93\46","\121\171\20\165\87\50\67"))) then keys[LUAOBFUSACTOR_DECRYPT_STR_0("\242\29\152\27\154\45\234\23\139\108","\98\166\88\217\86\217")   .. tostring(num) ]=true;end break;end end end break;end end break;end end end);FlatIdent_2F37F=1;end end end break;end if (FlatIdent_494DF==1) then if (FlatIdent_27957==4) then return keys;end if (FlatIdent_27957==3) then pcall(function() local FlatIdent_28F3E=0;local ls;while true do if (FlatIdent_28F3E==0) then ls=plr:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\250\243\120\5\131\206\229\226\120\21\149","\188\150\150\25\97\230"));if ls then for _,child in ipairs(ls:GetChildren()) do if (child:IsA(LUAOBFUSACTOR_DECRYPT_STR_0("\236\136\83\23\9\207\219\154\90","\141\186\233\63\98\108")) and isTeamishName(child.Name)) then local ok,v=pcall(function() return child.Value;end);if (ok and (v~=nil)) then keys[LUAOBFUSACTOR_DECRYPT_STR_0("\221\217\118","\69\145\138\76\214")   .. child.Name   .. ":"   .. tostring(v) ]=true;end end end end break;end end end);pcall(function() if plr.Character then for _,attr in ipairs(plr.Character:GetAttributes()) do if isTeamishName(attr) then local FlatIdent_494DF=0;local v;while true do if (FlatIdent_494DF==0) then v=plr.Character:GetAttribute(attr);if (v~=nil) then keys[LUAOBFUSACTOR_DECRYPT_STR_0("\83\238\189\189\141\63\82\149","\118\16\175\233\233\223")   .. attr   .. ":"   .. tostring(v) ]=true;end break;end end end end end end);FlatIdent_27957=4;end FlatIdent_494DF=2;end if (FlatIdent_494DF==0) then if (0==FlatIdent_27957) then local FlatIdent_64E40=0;while true do if (FlatIdent_64E40==0) then keys={};if  not plr then return keys;end FlatIdent_64E40=1;end if (FlatIdent_64E40==1) then FlatIdent_27957=1;break;end end end if (FlatIdent_27957==2) then local FlatIdent_207CC=0;while true do if (FlatIdent_207CC==1) then FlatIdent_27957=3;break;end if (FlatIdent_207CC==0) then pcall(function() for _,attr in ipairs(plr:GetAttributes()) do if isTeamishName(attr) then local FlatIdent_3EEE1=0;local v;while true do if (FlatIdent_3EEE1==0) then v=plr:GetAttribute(attr);if (v~=nil) then keys[LUAOBFUSACTOR_DECRYPT_STR_0("\187\165\1\143\220\162\95\209","\29\235\228\85\219\142\235")   .. attr   .. ":"   .. tostring(v) ]=true;end break;end end end end end);pcall(function() for _,child in ipairs(plr:GetChildren()) do if (child:IsA(LUAOBFUSACTOR_DECRYPT_STR_0("\11\213\182\200\114\108\38\65\56","\50\93\180\218\189\23\46\71")) and isTeamishName(child.Name)) then local FlatIdent_AC2F=0;local FlatIdent_39764;local ok;local v;while true do if (FlatIdent_AC2F==0) then FlatIdent_39764=0;ok=nil;FlatIdent_AC2F=1;end if (FlatIdent_AC2F==1) then v=nil;while true do if (FlatIdent_39764==0) then ok,v=pcall(function() return child.Value;end);if (ok and (v~=nil)) then keys[LUAOBFUSACTOR_DECRYPT_STR_0("\238\135\115\101\104\248\18","\40\190\196\59\44\36\188")   .. child.Name   .. ":"   .. tostring(v) ]=true;end break;end end break;end end end end end);FlatIdent_207CC=1;end end end FlatIdent_494DF=1;end end end break;end end end local _teamCache={[LUAOBFUSACTOR_DECRYPT_STR_0("\40\86","\109\92\37\188\212\154\29")]=0,[LUAOBFUSACTOR_DECRYPT_STR_0("\18\238\168\202\53\113\1\246\183","\58\100\143\196\163\81")]={},[LUAOBFUSACTOR_DECRYPT_STR_0("\27\78\47\136\58\80\246","\110\122\34\67\195\95\41\133")]={},[LUAOBFUSACTOR_DECRYPT_STR_0("\120\168\112\79\207\102","\182\21\209\59\42")]={}};local function refreshTeamCache() local FlatIdent_27404=0;while true do if (FlatIdent_27404==0) then _teamCache.ts=tick();pcall(function() local FlatIdent_9622C=0;local allKeys;local counts;local total;local valid;local minCount;local maxCount;local okMy;local mk;while true do if (FlatIdent_9622C==2) then local FlatIdent_45D37=0;while true do if (FlatIdent_45D37==1) then _teamCache.allKeys=allKeys;FlatIdent_9622C=3;break;end if (FlatIdent_45D37==0) then for k,c in pairs(counts) do if ((c>=minCount) and (c<=maxCount)) then valid[k]=true;end end _teamCache.validKeys=valid;FlatIdent_45D37=1;end end end if (FlatIdent_9622C==0) then allKeys,counts={},{};total=0;for _,p in ipairs(Players:GetPlayers()) do if (p~=LocalPlayer) then local FlatIdent_90A41=0;local FlatIdent_20FB0;local ok;local k;while true do if (FlatIdent_90A41==1) then k=nil;while true do if (0==FlatIdent_20FB0) then local FlatIdent_6225E=0;while true do if (FlatIdent_6225E==1) then FlatIdent_20FB0=1;break;end if (FlatIdent_6225E==0) then ok,k=pcall(collectTeamKeys,p);if ( not ok or (type(k)~=LUAOBFUSACTOR_DECRYPT_STR_0("\163\86\199\17\36","\222\215\55\165\125\65"))) then k={};end FlatIdent_6225E=1;end end end if (FlatIdent_20FB0==1) then local FlatIdent_21449=0;while true do if (FlatIdent_21449==0) then allKeys[p]=k;total=total + 1 ;FlatIdent_21449=1;end if (FlatIdent_21449==1) then FlatIdent_20FB0=2;break;end end end if (FlatIdent_20FB0==2) then for key,_ in pairs(k) do counts[key]=(counts[key] or 0) + 1 ;end break;end end break;end if (FlatIdent_90A41==0) then FlatIdent_20FB0=0;ok=nil;FlatIdent_90A41=1;end end end end FlatIdent_9622C=1;end if (FlatIdent_9622C==1) then local FlatIdent_4508F=0;while true do if (FlatIdent_4508F==1) then maxCount=math.max(2,math.floor(total * 0.6 ));FlatIdent_9622C=2;break;end if (FlatIdent_4508F==0) then valid={};minCount=1;FlatIdent_4508F=1;end end end if (FlatIdent_9622C==3) then okMy,mk=pcall(collectTeamKeys,LocalPlayer);_teamCache.myKeys=(okMy and (type(mk)==LUAOBFUSACTOR_DECRYPT_STR_0("\56\208\196\22\247","\42\76\177\166\122\146\161\141")) and mk) or {} ;break;end end end);break;end end end local function isTeammate(plr) local FlatIdent_6C033=0;local me;local ok1;local result;local ok2;local a;local b;local theirKeys;local myKeys;local valid;while true do local FlatIdent_67517=0;while true do if (FlatIdent_67517==2) then if (FlatIdent_6C033==1) then local FlatIdent_42BD8=0;while true do if (FlatIdent_42BD8==1) then if (ok1 and result) then local FlatIdent_2A644=0;local FlatIdent_22216;local mate;local decided;while true do if (FlatIdent_2A644==1) then decided=nil;while true do if (0==FlatIdent_22216) then mate,decided=pcall(function() local FlatIdent_854BA=0;local myTeam;local theirTeam;while true do if (FlatIdent_854BA==0) then myTeam,theirTeam=me.Team,plr.Team;if (myTeam and theirTeam) then return myTeam==theirTeam ,true;end FlatIdent_854BA=1;end if (FlatIdent_854BA==2) then return false,false;end if (FlatIdent_854BA==1) then if (myTeam and  not theirTeam) then return false,true;end if (theirTeam and  not myTeam) then return false,true;end FlatIdent_854BA=2;end end end);if (mate and decided) then end break;end end break;end if (FlatIdent_2A644==0) then FlatIdent_22216=0;mate=nil;FlatIdent_2A644=1;end end end FlatIdent_6C033=2;break;end if (FlatIdent_42BD8==0) then if ((plr==me) or (plr.UserId==me.UserId)) then return true;end ok1,result=pcall(function() local FlatIdent_4D434=0;local myTeam;local theirTeam;while true do if (FlatIdent_4D434==0) then local FlatIdent_869A9=0;while true do if (FlatIdent_869A9==0) then myTeam=me.Team;theirTeam=plr.Team;FlatIdent_869A9=1;end if (FlatIdent_869A9==1) then FlatIdent_4D434=1;break;end end end if (FlatIdent_4D434==2) then if (theirTeam and  not myTeam) then return false,true;end return false,false;end if (FlatIdent_4D434==1) then if (myTeam and theirTeam) then return myTeam==theirTeam ,true;end if (myTeam and  not theirTeam) then return false,true;end FlatIdent_4D434=2;end end end);FlatIdent_42BD8=1;end end end break;end if (FlatIdent_67517==0) then if (FlatIdent_6C033==0) then if  not plr then return false;end me=LocalPlayer;if  not me then return false;end FlatIdent_6C033=1;end if (FlatIdent_6C033==2) then local FlatIdent_7E707=0;while true do if (FlatIdent_7E707==1) then if ((tick() -_teamCache.ts)>1.5) then refreshTeamCache();end FlatIdent_6C033=3;break;end if (FlatIdent_7E707==0) then ok2,a,b=pcall(function() local myTeam,theirTeam=me.Team,plr.Team;if (myTeam and theirTeam) then return myTeam==theirTeam ,true;end if (myTeam and  not theirTeam) then return false,true;end if (theirTeam and  not myTeam) then return false,true;end return false,false;end);if (ok2 and b) then return a==true ;end FlatIdent_7E707=1;end end end FlatIdent_67517=1;end if (FlatIdent_67517==1) then if (FlatIdent_6C033==3) then theirKeys=_teamCache.allKeys[plr] or {} ;myKeys=_teamCache.myKeys or {} ;valid=_teamCache.validKeys or {} ;FlatIdent_6C033=4;end if (4==FlatIdent_6C033) then local FlatIdent_68856=0;while true do if (FlatIdent_68856==0) then for k,_ in pairs(myKeys) do if (valid[k] and theirKeys[k]) then return true;end end return false;end end end FlatIdent_67517=2;end end end end local function isValidAimTarget(plr) local FlatIdent_8638E=0;local FlatIdent_DFF4;while true do if (FlatIdent_8638E==0) then FlatIdent_DFF4=0;while true do if (FlatIdent_DFF4==0) then local FlatIdent_8FBAE=0;while true do if (FlatIdent_8FBAE==0) then if isSelf(plr) then return false;end if TEAM_CHECK then local FlatIdent_71EE8=0;local FlatIdent_1B881;local ok;local mate;while true do if (1==FlatIdent_71EE8) then mate=nil;while true do if (FlatIdent_1B881==0) then ok,mate=pcall(isTeammate,plr);if (ok and mate) then return false;end break;end end break;end if (FlatIdent_71EE8==0) then FlatIdent_1B881=0;ok=nil;FlatIdent_71EE8=1;end end end FlatIdent_8FBAE=1;end if (FlatIdent_8FBAE==1) then FlatIdent_DFF4=1;break;end end end if (FlatIdent_DFF4==1) then return true;end end break;end end end local function isMyPart(part) local FlatIdent_985A2=0;local myChar;while true do if (FlatIdent_985A2==1) then return (myChar and part:IsDescendantOf(myChar)) or false ;end if (FlatIdent_985A2==0) then if  not part then return true;end myChar=LocalPlayer and LocalPlayer.Character ;FlatIdent_985A2=1;end end end local function findPart(char,name) if  not char then return nil;end local p=char:FindFirstChild(name);if p then return p;end if (name==LUAOBFUSACTOR_DECRYPT_STR_0("\145\133\23\221\118","\22\197\234\101\174\25")) then p=char:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\24\36\181\217\100\155\216\148\62\59","\230\77\84\197\188\22\207\183")) or char:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\213\27\209\249\158\149\255\39\234\27","\85\153\116\166\156\236\193\144")) ;elseif (name==LUAOBFUSACTOR_DECRYPT_STR_0("\145\240\93\182\246\52\171\242\94\188","\96\196\128\45\211\132")) then p=char:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\1\130\105\76\221","\184\85\237\27\63\178\207\212"));end return p or char:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\32\76\4\94\6\86\0\91\58\86\6\75\56\88\27\75","\63\104\57\105")) or char:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\35\130\165\64","\36\107\231\196")) ;end local function cframeToYawPitch(cf) local FlatIdent_25A9F=0;local look;while true do if (FlatIdent_25A9F==0) then look=cf.LookVector;return math.atan2( -look.X, -look.Z),math.asin(math.clamp(look.Y, -1,1));end end end local function normalizeAngle(a) local FlatIdent_6EEC8=0;local FlatIdent_72421;while true do if (0==FlatIdent_6EEC8) then FlatIdent_72421=0;while true do if (FlatIdent_72421==1) then return a;end if (FlatIdent_72421==0) then while a>math.pi  do a=a-(math.pi * 2) ;end while a< -math.pi  do a=a + (math.pi * 2) ;end FlatIdent_72421=1;end end break;end end end local function screenAngle(worldPos) local FlatIdent_F26C=0;local FlatIdent_3B7E2;local camPos;local camDir;local toT;while true do if (FlatIdent_F26C==2) then while true do if (FlatIdent_3B7E2==0) then camPos=Camera.CFrame.Position;camDir=Camera.CFrame.LookVector;FlatIdent_3B7E2=1;end if (2==FlatIdent_3B7E2) then return math.deg(math.acos(math.clamp(camDir:Dot(toT.Unit), -1,1)));end if (FlatIdent_3B7E2==1) then local FlatIdent_2FBBD=0;while true do if (FlatIdent_2FBBD==1) then FlatIdent_3B7E2=2;break;end if (0==FlatIdent_2FBBD) then toT=worldPos-camPos ;if (toT.Magnitude<0.001) then return 0;end FlatIdent_2FBBD=1;end end end end break;end if (FlatIdent_F26C==1) then camDir=nil;toT=nil;FlatIdent_F26C=2;end if (FlatIdent_F26C==0) then FlatIdent_3B7E2=0;camPos=nil;FlatIdent_F26C=1;end end end local function easeOutCubic(t) local FlatIdent_40070=0;local inv;while true do local FlatIdent_527C6=0;while true do if (FlatIdent_527C6==0) then if (FlatIdent_40070==0) then t=math.clamp(t,0,1);inv=1 -t ;FlatIdent_40070=1;end if (1==FlatIdent_40070) then return 1 -(inv * inv * inv) ;end break;end end end end local function targetAlive(part) local FlatIdent_B1F4=0;local FlatIdent_2A9F7;local ok;local alive;while true do if (FlatIdent_B1F4==1) then alive=nil;while true do local FlatIdent_86E18=0;while true do if (FlatIdent_86E18==0) then if (FlatIdent_2A9F7==0) then local FlatIdent_163A8=0;while true do if (FlatIdent_163A8==1) then FlatIdent_2A9F7=1;break;end if (FlatIdent_163A8==0) then if ( not part or  not part.Parent) then return false;end ok,alive=pcall(function() local FlatIdent_6AEED=0;local hum;while true do if (FlatIdent_6AEED==0) then hum=part.Parent:FindFirstChildOfClass(LUAOBFUSACTOR_DECRYPT_STR_0("\117\160\175\134\83\186\171\131","\231\61\213\194"));return hum and (hum.Health>0) ;end end end);FlatIdent_163A8=1;end end end if (FlatIdent_2A9F7==1) then return (ok and alive) or false ;end break;end end end break;end if (FlatIdent_B1F4==0) then FlatIdent_2A9F7=0;ok=nil;FlatIdent_B1F4=1;end end end local headExpandOriginals={};local function restoreHead(head) local FlatIdent_5E109=0;local orig;while true do if (FlatIdent_5E109==0) then orig=headExpandOriginals[head];if orig then pcall(function() local FlatIdent_2DA99=0;while true do if (FlatIdent_2DA99==1) then head.CanCollide=orig.collide;head.Massless=orig.massless;break;end if (FlatIdent_2DA99==0) then head.Size=orig.size;head.Transparency=orig.trans;FlatIdent_2DA99=1;end end end);headExpandOriginals[head]=nil;end break;end end end local function expandHead(head,scale) if  not head then return;end if  not headExpandOriginals[head] then headExpandOriginals[head]={[LUAOBFUSACTOR_DECRYPT_STR_0("\26\164\39\118","\19\105\205\93")]=head.Size,[LUAOBFUSACTOR_DECRYPT_STR_0("\189\26\223\143\44","\95\201\104\190\225")]=head.Transparency,[LUAOBFUSACTOR_DECRYPT_STR_0("\172\196\205\194\166\207\196","\174\207\171\161")]=head.CanCollide,[LUAOBFUSACTOR_DECRYPT_STR_0("\224\255\30\224\244\210\254\237","\183\141\158\109\147\152")]=head.Massless};end local orig=headExpandOriginals[head];pcall(function() local FlatIdent_71E8F=0;local FlatIdent_912A7;local sy;while true do if (FlatIdent_71E8F==1) then while true do if (FlatIdent_912A7==0) then sy=orig.size.Y * math.max(1,scale * 0.4 ) ;head.Size=Vector3.new(orig.size.X * scale ,sy,orig.size.Z * scale );break;end end break;end if (FlatIdent_71E8F==0) then FlatIdent_912A7=0;sy=nil;FlatIdent_71E8F=1;end end end);end local function updateHeadExpand() local FlatIdent_5AB84=0;local FlatIdent_69C4C;local scale;local active;while true do if (FlatIdent_5AB84==1) then active=nil;while true do if (1==FlatIdent_69C4C) then active={};for _,plr in ipairs(Players:GetPlayers()) do if (isValidAimTarget(plr) and plr.Character) then local FlatIdent_5077=0;local FlatIdent_83844;local head;while true do if (FlatIdent_5077==0) then FlatIdent_83844=0;head=nil;FlatIdent_5077=1;end if (FlatIdent_5077==1) then while true do if (FlatIdent_83844==0) then head=plr.Character:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\4\12\231\8","\108\76\105\134"));if head then local FlatIdent_5CA49=0;while true do if (FlatIdent_5CA49==0) then active[head]=true;expandHead(head,scale);break;end end end break;end end break;end end end end FlatIdent_69C4C=2;end if (FlatIdent_69C4C==0) then if  not AIM.head_expand_enabled then for head in pairs(headExpandOriginals) do restoreHead(head);end return;end scale=AIM.head_expand_scale or 6 ;FlatIdent_69C4C=1;end if (2==FlatIdent_69C4C) then for head in pairs(headExpandOriginals) do if ( not active[head] or  not head.Parent) then restoreHead(head);end end break;end end break;end if (FlatIdent_5AB84==0) then FlatIdent_69C4C=0;scale=nil;FlatIdent_5AB84=1;end end end task.spawn(function() while task.wait(0.15) do local FlatIdent_7063=0;while true do if (FlatIdent_7063==0) then if _my_stop then return;end pcall(updateHeadExpand);break;end end end end);local Human={[LUAOBFUSACTOR_DECRYPT_STR_0("\228\211\180\243\221\227\202\190\245\241\234\198\165\232\216\238","\174\139\165\209\129")]=false,[LUAOBFUSACTOR_DECRYPT_STR_0("\172\165\231\211\213\11\127\119\183\140\246","\24\195\211\130\161\166\99\16")]=0,[LUAOBFUSACTOR_DECRYPT_STR_0("\73\21\236\62\64\30\73\12\253\19\82\27\73\22\231\56","\118\38\99\137\76\51")]=0,[LUAOBFUSACTOR_DECRYPT_STR_0("\243\35\29\6\54\50\248\39\6\6","\64\157\70\101\114\105")]=0,[LUAOBFUSACTOR_DECRYPT_STR_0("\82\173\166\224\4\127\189\169\247\25\76","\112\32\200\199\131")]=0,[LUAOBFUSACTOR_DECRYPT_STR_0("\32\81\79\172\252\184\53\37\68\95\176","\66\76\48\60\216\163\203")]=0,[LUAOBFUSACTOR_DECRYPT_STR_0("\187\143\116\204\80\200\34\169\131\109","\68\218\230\25\147\63\174")]=Vector3.new(0,0,0),[LUAOBFUSACTOR_DECRYPT_STR_0("\162\44\85\95\179\185\21\71","\214\205\74\51\44")]=0,[LUAOBFUSACTOR_DECRYPT_STR_0("\248\94\231\253\99\242\115\246","\23\154\44\130\156")]=0,[LUAOBFUSACTOR_DECRYPT_STR_0("\2\182\168\171\50\62\4\170\185","\115\113\198\205\206\86")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\151\71\251\95\128\121\241\83\151\82\202","\58\228\55\158")]=0,[LUAOBFUSACTOR_DECRYPT_STR_0("\185\128\211\60\51\146\37\188\136\195\43","\85\212\233\176\78\92\205")]=0,[LUAOBFUSACTOR_DECRYPT_STR_0("\94\74\141\239\69\74\183\242\66\89\155\231","\130\42\56\232")]=0,[LUAOBFUSACTOR_DECRYPT_STR_0("\238\167\45\229\84\0\242","\95\138\213\68\131\32")]=0,[LUAOBFUSACTOR_DECRYPT_STR_0("\46\58\168\69\98\21\49","\22\74\72\193\35")]=0,[LUAOBFUSACTOR_DECRYPT_STR_0("\40\107\237\94\56\70\241\86\56\112\232","\56\76\25\132")]=0,[LUAOBFUSACTOR_DECRYPT_STR_0("\77\196\174\34\158","\175\62\161\203\70")]=math.random() * 1000 ,[LUAOBFUSACTOR_DECRYPT_STR_0("\47\216\198\23\103","\85\92\189\163\115")]=math.random() * 1000 ,[LUAOBFUSACTOR_DECRYPT_STR_0("\58\169\53\60\122","\88\73\204\80")]=math.random() * 1000 ,[LUAOBFUSACTOR_DECRYPT_STR_0("\36\138\4\82\44\200\29\134\21\66","\186\78\227\112\38\73")]=math.random() * 1000 };local function rollReactDelay(rMin,rMax) local FlatIdent_84B7E=0;local FlatIdent_92F66;local u;while true do if (FlatIdent_84B7E==0) then FlatIdent_92F66=0;u=nil;FlatIdent_84B7E=1;end if (1==FlatIdent_84B7E) then while true do if (FlatIdent_92F66==1) then return rMin + ((rMax-rMin) * u * u) ;end if (FlatIdent_92F66==0) then local FlatIdent_14124=0;while true do if (FlatIdent_14124==1) then FlatIdent_92F66=1;break;end if (0==FlatIdent_14124) then if (rMax<=rMin) then return rMin;end u=math.random();FlatIdent_14124=1;end end end end break;end end end local function humanUpdateOffsets(dt) local FlatIdent_94AF7=0;while true do if (FlatIdent_94AF7==0) then local FlatIdent_8E29D=0;while true do if (1==FlatIdent_8E29D) then FlatIdent_94AF7=1;break;end if (FlatIdent_8E29D==0) then Human.offset_t=Human.offset_t + dt ;if (Human.offset_t>0.4) then Human.offset_t=0;local amp=0.05 * AIM.humanize_level ;Human.aim_offset=Vector3.new((math.random() -0.5) * amp ,(math.random() -0.5) * amp ,(math.random() -0.5) * amp );end FlatIdent_8E29D=1;end end end if (FlatIdent_94AF7==1) then Human.breath_t=Human.breath_t + dt ;break;end end end local function pickTarget(fov,maxDist,minDist,useBone,prefer) if (prefer and prefer.Parent and  not isMyPart(prefer)) then local FlatIdent_6E549=0;local hum;while true do if (FlatIdent_6E549==0) then hum=prefer.Parent:FindFirstChildOfClass(LUAOBFUSACTOR_DECRYPT_STR_0("\212\66\240\84\93\117\245\83","\26\156\55\157\53\51"));if (hum and (hum.Health>0)) then local FlatIdent_21CA5=0;local dist;while true do if (FlatIdent_21CA5==0) then dist=(prefer.Position-Camera.CFrame.Position).Magnitude;if ((dist>=(minDist or 2.5)) and (dist<=maxDist) and isVisible(prefer)) then local FlatIdent_1F620=0;local ang;while true do if (FlatIdent_1F620==0) then ang=screenAngle(prefer.Position);if (ang<=fov) then return prefer;end break;end end end break;end end end break;end end end local best,bestScore=nil,math.huge;local camPos=Camera.CFrame.Position;local myChar=LocalPlayer and LocalPlayer.Character ;for _,plr in ipairs(Players:GetPlayers()) do if (isValidAimTarget(plr) and plr.Character and (plr.Character~=myChar)) then local FlatIdent_7517F=0;local hum;while true do if (0==FlatIdent_7517F) then hum=plr.Character:FindFirstChildOfClass(LUAOBFUSACTOR_DECRYPT_STR_0("\164\205\27\216\182\95\133\220","\48\236\184\118\185\216"));if (hum and (hum.Health>0)) then local FlatIdent_8BE54=0;local bone;local part;while true do if (FlatIdent_8BE54==1) then part=findPart(plr.Character,bone);if (part and  not isMyPart(part)) then local FlatIdent_43BEE=0;local dist;while true do if (0==FlatIdent_43BEE) then dist=(part.Position-camPos).Magnitude;if ((dist>=(minDist or 2.5)) and (dist<=maxDist) and isVisible(part)) then local FlatIdent_15034=0;local ang;while true do if (FlatIdent_15034==0) then ang=screenAngle(part.Position);if (ang<=fov) then local score=(ang * 1.5) + (dist * 0.02) ;if (score<bestScore) then bestScore,best=score,part;end end break;end end end break;end end end break;end if (FlatIdent_8BE54==0) then bone=useBone;if ( not bone or (bone=="")) then bone=((AIM.bone~="") and AIM.bone) or LUAOBFUSACTOR_DECRYPT_STR_0("\205\184\86\52","\84\133\221\55\80\175") ;end FlatIdent_8BE54=1;end end end break;end end end end return best;end local function pickSilentTarget() return pickTarget(AIM.silent_fov,AIM.silent_maxdist,AIM.silent_mindist,AIM.silent_bone);end local function blendDirection(origDir,targetPos,originPos,strength) local FlatIdent_23FF9=0;local FlatIdent_2BE68;local toT;local s;local orig;local b;while true do if (FlatIdent_23FF9==0) then FlatIdent_2BE68=0;toT=nil;FlatIdent_23FF9=1;end if (FlatIdent_23FF9==1) then s=nil;orig=nil;FlatIdent_23FF9=2;end if (FlatIdent_23FF9==2) then b=nil;while true do local FlatIdent_6B9E2=0;while true do if (FlatIdent_6B9E2==0) then if (FlatIdent_2BE68==2) then local FlatIdent_1CFC3=0;while true do if (FlatIdent_1CFC3==0) then b=orig:Lerp(toT.Unit,s);return ((b.Magnitude>0.001) and b.Unit) or origDir ;end end end if (FlatIdent_2BE68==1) then local FlatIdent_45CCF=0;while true do if (FlatIdent_45CCF==1) then FlatIdent_2BE68=2;break;end if (FlatIdent_45CCF==0) then s=math.clamp(strength or 0.5 ,0,1);orig=((origDir.Magnitude>0.0001) and origDir.Unit) or toT.Unit ;FlatIdent_45CCF=1;end end end FlatIdent_6B9E2=1;end if (FlatIdent_6B9E2==1) then if (FlatIdent_2BE68==0) then local FlatIdent_499B1=0;while true do if (FlatIdent_499B1==0) then toT=targetPos-originPos ;if (toT.Magnitude<0.001) then return origDir;end FlatIdent_499B1=1;end if (FlatIdent_499B1==1) then FlatIdent_2BE68=1;break;end end end break;end end end break;end end end local silentHitCount=0;local function trySetupSilentAim() if  not (getrawmetatable and setreadonly and newcclosure and getnamecallmethod) then local FlatIdent_6D884=0;while true do if (0==FlatIdent_6D884) then local FlatIdent_17AE1=0;while true do if (0==FlatIdent_17AE1) then warn(LUAOBFUSACTOR_DECRYPT_STR_0("\134\212\13\138\226\114\137\218\100\163\223\89\190\242\48\169\213\28\177\230\39\173\212\28\181\232\43\173\212","\60\221\135\68\198\167"));return false;end end end end end local ok,mt=pcall(getrawmetatable,game);if ( not ok or  not mt or  not mt.__namecall) then return false;end local oldNamecall=mt.__namecall;if  not oldNamecall then return false;end local ok2=pcall(function() setreadonly(mt,false);mt.__namecall=newcclosure(function(self,...) if _my_stop then return oldNamecall(self,...);end local okH,errH=pcall(function() local method=getnamecallmethod();if (AIM.silent_enabled and ((method==LUAOBFUSACTOR_DECRYPT_STR_0("\200\180\234\134\113\220\252\171\253\145","\185\142\221\152\227\34")) or (method==LUAOBFUSACTOR_DECRYPT_STR_0("\113\203\65\245\72\54\196\93\215\65\255\81","\151\56\165\55\154\35\83"))) and (typeof(self)==LUAOBFUSACTOR_DECRYPT_STR_0("\137\77\22\250\161\77\6\235","\142\192\35\101")) and (self:IsA(LUAOBFUSACTOR_DECRYPT_STR_0("\228\112\36\172\243\137\137\0\211\123\61","\118\182\21\73\195\135\236\204")) or self:IsA(LUAOBFUSACTOR_DECRYPT_STR_0("\58\57\23\79\16\8\219\29\50\25\84\13\2\243","\157\104\92\122\32\100\109")))) then local args={...};for i=1,math.min(5, #args) do local a=args[i];if (typeof(a)==LUAOBFUSACTOR_DECRYPT_STR_0("\149\163\204\222\50\53\222","\203\195\198\175\170\93\71\237")) then if (a.Magnitude>0.001) then local FlatIdent_9525B=0;local FlatIdent_86E18;local t;while true do if (FlatIdent_9525B==1) then while true do if (FlatIdent_86E18==0) then t=pickSilentTarget();if t then local FlatIdent_163A8=0;local o;local strength;local adjTarget;local blended;while true do if (FlatIdent_163A8==1) then local FlatIdent_47A85=0;while true do if (FlatIdent_47A85==1) then FlatIdent_163A8=2;break;end if (FlatIdent_47A85==0) then strength=strength * math.clamp(AIM.silent_smooth or 1 ,0.05,1) ;adjTarget=t.Position;FlatIdent_47A85=1;end end end if (FlatIdent_163A8==0) then local FlatIdent_1B5ED=0;while true do if (FlatIdent_1B5ED==0) then o=Camera.CFrame.Position;strength=AIM.silent_strength or 0.5 ;FlatIdent_1B5ED=1;end if (FlatIdent_1B5ED==1) then FlatIdent_163A8=1;break;end end end if (FlatIdent_163A8==3) then args[i]=blended * a.Magnitude ;silentHitCount=silentHitCount + 1 ;break;end if (2==FlatIdent_163A8) then local FlatIdent_94BA0=0;while true do if (0==FlatIdent_94BA0) then if AIM.silent_humanize then local FlatIdent_42B8B=0;local FlatIdent_51C44;local missAmt;while true do if (FlatIdent_42B8B==1) then while true do if (FlatIdent_51C44==1) then strength=math.clamp(strength + (math.noise(tick() * 1.3 ,0) * 0.05 * (AIM.humanize_level or 1)) ,0.02,1);break;end if (FlatIdent_51C44==0) then missAmt=(1 -math.clamp(AIM.silent_smooth or 1 ,0.1,1)) * 2.5 * (AIM.humanize_level or 1) ;adjTarget=t.Position + Vector3.new((math.random() -0.5) * missAmt ,(math.random() -0.5) * missAmt ,(math.random() -0.5) * missAmt ) ;FlatIdent_51C44=1;end end break;end if (FlatIdent_42B8B==0) then FlatIdent_51C44=0;missAmt=nil;FlatIdent_42B8B=1;end end end blended=blendDirection(a.Unit,adjTarget,o,strength);FlatIdent_94BA0=1;end if (FlatIdent_94BA0==1) then FlatIdent_163A8=3;break;end end end end end break;end end break;end if (FlatIdent_9525B==0) then FlatIdent_86E18=0;t=nil;FlatIdent_9525B=1;end end end break;elseif (typeof(a)==LUAOBFUSACTOR_DECRYPT_STR_0("\13\109\44\212\92\20","\156\78\43\94\181\49\113")) then local t=pickSilentTarget();if t then local FlatIdent_8BF78=0;local FlatIdent_13B77;local strength;local adjTarget;local blended;while true do if (FlatIdent_8BF78==2) then while true do if (0==FlatIdent_13B77) then local FlatIdent_851CE=0;while true do if (FlatIdent_851CE==0) then strength=AIM.silent_strength or 0.5 ;strength=strength * math.clamp(AIM.silent_smooth or 1 ,0.05,1) ;FlatIdent_851CE=1;end if (FlatIdent_851CE==1) then FlatIdent_13B77=1;break;end end end if (FlatIdent_13B77==2) then local FlatIdent_82AB4=0;while true do if (FlatIdent_82AB4==1) then FlatIdent_13B77=3;break;end if (FlatIdent_82AB4==0) then blended=blendDirection(a.LookVector,adjTarget,a.Position,strength);args[i]=CFrame.lookAt(a.Position,a.Position + blended );FlatIdent_82AB4=1;end end end if (FlatIdent_13B77==3) then silentHitCount=silentHitCount + 1 ;break;end if (FlatIdent_13B77==1) then local FlatIdent_93FA5=0;while true do if (0==FlatIdent_93FA5) then adjTarget=t.Position;if AIM.silent_humanize then local FlatIdent_76EB7=0;local FlatIdent_6E214;local missAmt;while true do if (1==FlatIdent_76EB7) then while true do if (FlatIdent_6E214==0) then missAmt=(1 -math.clamp(AIM.silent_smooth or 1 ,0.1,1)) * 2.5 * (AIM.humanize_level or 1) ;adjTarget=t.Position + Vector3.new((math.random() -0.5) * missAmt ,(math.random() -0.5) * missAmt ,(math.random() -0.5) * missAmt ) ;break;end end break;end if (FlatIdent_76EB7==0) then FlatIdent_6E214=0;missAmt=nil;FlatIdent_76EB7=1;end end end FlatIdent_93FA5=1;end if (FlatIdent_93FA5==1) then FlatIdent_13B77=2;break;end end end end break;end if (FlatIdent_8BF78==1) then adjTarget=nil;blended=nil;FlatIdent_8BF78=2;end if (0==FlatIdent_8BF78) then FlatIdent_13B77=0;strength=nil;FlatIdent_8BF78=1;end end end break;end end return oldNamecall(self,table.unpack(args));end end);if  not okH then warn(LUAOBFUSACTOR_DECRYPT_STR_0("\73\219\237\143\46\109\77\79\168\204\172\4\72\57\119\250\214\172\25\25\57","\25\18\136\164\195\107\35")   .. tostring(errH) );end return oldNamecall(self,...);end);setreadonly(mt,true);end);if ok2 then print(LUAOBFUSACTOR_DECRYPT_STR_0("\211\30\128\99\87\146\245\133\168\35\168\66\119\191\192\180\228\109\161\64\125\183\129\177\230\62\189\78\126\176\196\188","\216\136\77\201\47\18\220\161"));end return ok2;end trySetupSilentAim();local function trySetupAutoHead() if  not (getrawmetatable and setreadonly and newcclosure and getnamecallmethod) then return false;end local ok,mt=pcall(getrawmetatable,game);if ( not ok or  not mt or  not mt.__namecall) then return false;end local oldNamecall=mt.__namecall;if  not oldNamecall then return false;end local ok2=pcall(function() setreadonly(mt,false);mt.__namecall=newcclosure(function(self,...) if _my_stop then return oldNamecall(self,...);end local okH=pcall(function() local method=getnamecallmethod();if (AIM.autohead_enabled and (self==Workspace)) then local isRay=(method==LUAOBFUSACTOR_DECRYPT_STR_0("\31\237\50\217\9\207\150","\226\77\140\75\186\104\188")) or (method==LUAOBFUSACTOR_DECRYPT_STR_0("\159\199\222\59\127\184\220\196\16\65\139\207\201","\47\217\174\176\95")) or (method==LUAOBFUSACTOR_DECRYPT_STR_0("\158\212\120\6\130\85\106\50\151\211\68\3\171\99\113\50\176\244\113\12\189\70\125\10\177\206\98","\70\216\189\22\98\210\52\24")) or (method==LUAOBFUSACTOR_DECRYPT_STR_0("\252\214\173\131\227\219\205\183\168\221\232\222\186\176\218\206\215\148\143\218\206\218\175\142\192\206","\179\186\191\195\231")) ;if isRay then local FlatIdent_81DE9=0;local FlatIdent_75331;local args;local originV;local dirV;while true do if (FlatIdent_81DE9==0) then FlatIdent_75331=0;args=nil;FlatIdent_81DE9=1;end if (FlatIdent_81DE9==1) then originV=nil;dirV=nil;FlatIdent_81DE9=2;end if (FlatIdent_81DE9==2) then while true do if (FlatIdent_75331==0) then local FlatIdent_4CEEC=0;while true do if (FlatIdent_4CEEC==1) then FlatIdent_75331=1;break;end if (FlatIdent_4CEEC==0) then args={...};originV,dirV=nil;FlatIdent_4CEEC=1;end end end if (FlatIdent_75331==1) then if (method==LUAOBFUSACTOR_DECRYPT_STR_0("\203\62\1\231\248\44\12","\132\153\95\120")) then if ((typeof(args[1])==LUAOBFUSACTOR_DECRYPT_STR_0("\135\183\13\57\248\200\243","\192\209\210\110\77\151\186")) and (typeof(args[2])==LUAOBFUSACTOR_DECRYPT_STR_0("\214\6\33\253\240\214\179","\164\128\99\66\137\159"))) then originV,dirV=args[1],args[2];end elseif (typeof(args[1])==LUAOBFUSACTOR_DECRYPT_STR_0("\50\136\240","\222\96\233\137")) then originV,dirV=args[1].Origin,args[1].Direction;end if (originV and dirV) then local results={oldNamecall(self,...)};local r=results[1];local hit=((typeof(r)==LUAOBFUSACTOR_DECRYPT_STR_0("\139\178\190\28\137\224\228\139\182\180\10\132\231","\144\217\211\199\127\232\147")) and r.Instance) or ((typeof(r)==LUAOBFUSACTOR_DECRYPT_STR_0("\209\33\45\60\212\75\1\65","\36\152\79\94\72\181\37\98")) and r) or nil ;if hit then local FlatIdent_21E03=0;local char;local plr;while true do if (FlatIdent_21E03==1) then if (plr and isValidAimTarget(plr)) then local FlatIdent_79F35=0;local FlatIdent_2C7C4;local head;while true do if (FlatIdent_79F35==0) then FlatIdent_2C7C4=0;head=nil;FlatIdent_79F35=1;end if (1==FlatIdent_79F35) then while true do if (FlatIdent_2C7C4==0) then head=char:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\255\221\70\59","\95\183\184\39"));if (head and (hit~=head) and head:IsDescendantOf(char) and hit:IsDescendantOf(char)) then local FlatIdent_8239F=0;local nd;while true do if (0==FlatIdent_8239F) then nd=head.Position-originV ;if (nd.Magnitude>0.001) then local FlatIdent_669F5=0;local na;while true do local FlatIdent_6D8EC=0;while true do if (FlatIdent_6D8EC==0) then if (1==FlatIdent_669F5) then local FlatIdent_25061=0;while true do if (FlatIdent_25061==0) then if (method==LUAOBFUSACTOR_DECRYPT_STR_0("\135\62\254\37\85\147\22","\98\213\95\135\70\52\224")) then local FlatIdent_4D11E=0;while true do if (FlatIdent_4D11E==0) then na={originV,nd};for i=3, #args do na[i]=args[i];end break;end end else local FlatIdent_4F2F2=0;while true do if (FlatIdent_4F2F2==0) then na={Ray.new(originV,nd)};for i=2, #args do na[i]=args[i];end break;end end end return oldNamecall(self,table.unpack(na));end end end if (FlatIdent_669F5==0) then local FlatIdent_95359=0;while true do if (1==FlatIdent_95359) then FlatIdent_669F5=1;break;end if (0==FlatIdent_95359) then nd=nd.Unit * dirV.Magnitude ;na=nil;FlatIdent_95359=1;end end end break;end end end end break;end end end break;end end break;end end end break;end if (FlatIdent_21E03==0) then char=hit:FindFirstAncestorOfClass(LUAOBFUSACTOR_DECRYPT_STR_0("\211\172\205\114\88","\52\158\195\169\23"));plr=char and Players:GetPlayerFromCharacter(char) ;FlatIdent_21E03=1;end end end return table.unpack(results);end break;end end break;end end end end end);return oldNamecall(self,...);end);setreadonly(mt,true);end);if ok2 then print(LUAOBFUSACTOR_DECRYPT_STR_0("\65\157\7\64\169\29\94\170\94\129\114\124\137\58\112\203\115\178\33\96\135\57\119\142\126","\235\26\220\82\20\230\85\27"));end return ok2;end trySetupAutoHead();local BodyAim={[LUAOBFUSACTOR_DECRYPT_STR_0("\130\174\224\204\96\155","\20\232\193\137\162")]=nil,[LUAOBFUSACTOR_DECRYPT_STR_0("\33\215\196\180\213\137\17","\17\66\191\165\198\135\236\119")]=nil,[LUAOBFUSACTOR_DECRYPT_STR_0("\0\189\167\20\200\233\229\194\27\140\254","\177\111\207\206\115\159\136\140")]=nil,[LUAOBFUSACTOR_DECRYPT_STR_0("\10\155\25\19\250\74\92\14\170\64","\63\101\233\112\116\180\47")]=nil};local function resetBodyAim() local FlatIdent_6B9E2=0;while true do if (FlatIdent_6B9E2==0) then if BodyAim.joints then pcall(function() local FlatIdent_54124=0;local FlatIdent_70003;while true do if (FlatIdent_54124==0) then FlatIdent_70003=0;while true do if (FlatIdent_70003==0) then if (BodyAim.joints.waist and BodyAim.origWaistC0) then BodyAim.joints.waist.C0=BodyAim.origWaistC0;end if (BodyAim.joints.neck and BodyAim.origNeckC0) then BodyAim.joints.neck.C0=BodyAim.origNeckC0;end break;end end break;end end end);end BodyAim.joints,BodyAim.origWaistC0,BodyAim.origNeckC0,BodyAim.charRef=nil,nil,nil,nil;break;end end end local function ensureBodyAim() local me=LocalPlayer;local char=me and me.Character ;if  not char then local FlatIdent_68E5B=0;local FlatIdent_322B4;while true do if (FlatIdent_68E5B==0) then FlatIdent_322B4=0;while true do if (FlatIdent_322B4==0) then if BodyAim.charRef then resetBodyAim();end return;end end break;end end end if ((BodyAim.charRef==char) and BodyAim.joints) then return;end resetBodyAim();local hrp=char:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\235\46\224\19\246\57\202\63\223\29\247\34\243\58\255\6","\86\163\91\141\114\152"));if  not hrp then return;end local waist;local lt=char:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\127\4\99\118\40\103\4\102\96\53","\90\51\107\20\19"));if lt then waist=lt:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\186\241\140\252\41","\93\237\144\229\143"));end if  not waist then waist=hrp:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\34\247\249\10\31","\38\117\150\144\121\107")) or hrp:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\31\180\225\46\7\180\231\52\57","\90\77\219\142")) ;end if  not waist then waist=char:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\209\5\40\42\88","\26\134\100\65\89\44\103"),true) or char:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\195\236\63\55\142\254\234\62\55","\196\145\131\80\67"),true) ;end local neck;local head=char:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\54\181\7\12","\136\126\208\102\104\120"));if head then neck=head:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\86\143\205\72","\49\24\234\174\35\207\50\93"));end if  not neck then local FlatIdent_70C30=0;local FlatIdent_9851B;local torso;while true do if (FlatIdent_70C30==1) then while true do if (FlatIdent_9851B==0) then torso=char:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\56\253\239\155\126","\17\108\146\157\232"));if torso then neck=torso:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\101\198\23\230","\200\43\163\116\141\79"));end break;end end break;end if (FlatIdent_70C30==0) then FlatIdent_9851B=0;torso=nil;FlatIdent_70C30=1;end end end if  not neck then neck=char:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\145\51\62\136","\131\223\86\93\227\208\148"),true);end if ( not waist or  not neck) then return;end BodyAim.charRef=char;BodyAim.joints={[LUAOBFUSACTOR_DECRYPT_STR_0("\244\68\191\165\9","\213\131\37\214\214\125")]=waist,[LUAOBFUSACTOR_DECRYPT_STR_0("\40\46\38\180","\129\70\75\69\223")]=neck};BodyAim.origWaistC0,BodyAim.origNeckC0=waist.C0,neck.C0;end local function applyBodyAimYawPitch(yaw,pitch) local FlatIdent_3E44E=0;local hrp;local hrpYaw;local cy;local np;while true do if (3==FlatIdent_3E44E) then cy=math.clamp(normalizeAngle(yaw-hrpYaw ), -math.rad(75),math.rad(75));np=math.clamp(pitch, -math.rad(55),math.rad(55));FlatIdent_3E44E=4;end if (FlatIdent_3E44E==2) then local FlatIdent_14A6D=0;while true do if (FlatIdent_14A6D==1) then FlatIdent_3E44E=3;break;end if (FlatIdent_14A6D==0) then if  not hrp then local FlatIdent_2C1E9=0;while true do if (FlatIdent_2C1E9==0) then resetBodyAim();return;end end end hrpYaw=cframeToYawPitch(hrp.CFrame);FlatIdent_14A6D=1;end end end if (FlatIdent_3E44E==1) then if ( not BodyAim.joints or  not BodyAim.charRef) then return;end hrp=BodyAim.charRef:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\110\222\254\232\114\224\79\207\193\230\115\251\118\202\225\253","\143\38\171\147\137\28"));FlatIdent_3E44E=2;end if (FlatIdent_3E44E==4) then if (BodyAim.joints.waist and BodyAim.origWaistC0) then pcall(function() BodyAim.joints.waist.C0=BodyAim.origWaistC0 * CFrame.Angles(0,cy,0) ;end);end if (BodyAim.joints.neck and BodyAim.origNeckC0) then pcall(function() local FlatIdent_259C6=0;local FlatIdent_6E23;local nr;local ny2;while true do if (FlatIdent_259C6==0) then FlatIdent_6E23=0;nr=nil;FlatIdent_259C6=1;end if (FlatIdent_259C6==1) then ny2=nil;while true do if (FlatIdent_6E23==0) then nr=normalizeAngle(yaw-(hrpYaw + cy) );ny2=math.clamp(nr, -math.rad(70),math.rad(70));FlatIdent_6E23=1;end if (FlatIdent_6E23==1) then BodyAim.joints.neck.C0=BodyAim.origNeckC0 * CFrame.fromEulerAnglesYXZ( -np,ny2 * 0.5 ,0) ;break;end end break;end end end);end break;end if (FlatIdent_3E44E==0) then if  not AIM.body_aim then local FlatIdent_7C89=0;local FlatIdent_5C408;while true do if (FlatIdent_7C89==0) then FlatIdent_5C408=0;while true do if (FlatIdent_5C408==0) then if BodyAim.joints then resetBodyAim();end return;end end break;end end end ensureBodyAim();FlatIdent_3E44E=1;end end end local hitboxOriginals={};local function restoreHitbox(part) local FlatIdent_7DCBC=0;local orig;while true do if (FlatIdent_7DCBC==0) then orig=hitboxOriginals[part];if orig then local FlatIdent_4EC26=0;while true do if (FlatIdent_4EC26==0) then pcall(function() local FlatIdent_1D5FF=0;while true do if (FlatIdent_1D5FF==1) then part.CanCollide=orig.collide;part.Massless=orig.massless;break;end if (FlatIdent_1D5FF==0) then local FlatIdent_2DACE=0;while true do if (FlatIdent_2DACE==0) then part.Size=orig.size;part.Transparency=orig.trans;FlatIdent_2DACE=1;end if (FlatIdent_2DACE==1) then FlatIdent_1D5FF=1;break;end end end end end);hitboxOriginals[part]=nil;break;end end end break;end end end local function applyHitbox(part,scale) local FlatIdent_401F9=0;local FlatIdent_1EAB2;local orig;while true do if (FlatIdent_401F9==0) then FlatIdent_1EAB2=0;orig=nil;FlatIdent_401F9=1;end if (FlatIdent_401F9==1) then while true do if (0==FlatIdent_1EAB2) then local FlatIdent_2EB74=0;while true do if (FlatIdent_2EB74==1) then FlatIdent_1EAB2=1;break;end if (FlatIdent_2EB74==0) then if  not part then return;end if  not hitboxOriginals[part] then hitboxOriginals[part]={[LUAOBFUSACTOR_DECRYPT_STR_0("\195\139\163\246","\180\176\226\217\147\99\131")]=part.Size,[LUAOBFUSACTOR_DECRYPT_STR_0("\199\171\46\9\192","\103\179\217\79")]=part.Transparency,[LUAOBFUSACTOR_DECRYPT_STR_0("\73\184\16\217\72\136\166","\195\42\215\124\181\33\236")]=part.CanCollide,[LUAOBFUSACTOR_DECRYPT_STR_0("\0\88\36\45\41\253\30\74","\152\109\57\87\94\69")]=part.Massless};end FlatIdent_2EB74=1;end end end if (1==FlatIdent_1EAB2) then orig=hitboxOriginals[part];pcall(function() part.Size=Vector3.new(orig.size.X * scale ,orig.size.Y * scale ,orig.size.Z * scale );end);break;end end break;end end end local function updateHitboxes() local FlatIdent_7695C=0;local FlatIdent_1B418;local scale;local active;while true do if (FlatIdent_7695C==1) then active=nil;while true do if (FlatIdent_1B418==0) then scale=(CFG.HITBOX_ON and CFG.HITBOX_SCALE) or 1 ;active={};FlatIdent_1B418=1;end if (FlatIdent_1B418==1) then for _,plr in ipairs(Players:GetPlayers()) do if (isValidAimTarget(plr) and plr.Character) then local FlatIdent_1F138=0;local hrp;while true do if (FlatIdent_1F138==0) then hrp=plr.Character:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\209\194\7\162\176\221\93\172\203\216\5\183\142\211\70\188","\200\153\183\106\195\222\178\52"));if hrp then local FlatIdent_61AEE=0;while true do if (FlatIdent_61AEE==0) then active[hrp]=true;if (scale>1) then applyHitbox(hrp,scale);else restoreHitbox(hrp);end break;end end end break;end end end end for part in pairs(hitboxOriginals) do if ( not active[part] or  not part.Parent) then restoreHitbox(part);end end break;end end break;end if (FlatIdent_7695C==0) then FlatIdent_1B418=0;scale=nil;FlatIdent_7695C=1;end end end task.spawn(function() while task.wait(0.2) do local FlatIdent_4609C=0;while true do if (FlatIdent_4609C==0) then if _my_stop then return;end pcall(updateHitboxes);break;end end end end);local function collectESP() local list={};local ok,res=pcall(function() local FlatIdent_15C08=0;local myPos;while true do if (FlatIdent_15C08==0) then myPos=Camera.CFrame.Position;for _,plr in ipairs(Players:GetPlayers()) do if ( not isSelf(plr) and plr.Character) then local FlatIdent_89C1C=0;local hrp;local hum;while true do if (FlatIdent_89C1C==1) then if (hrp and hum and (hum.Health>0)) then local FlatIdent_59C45=0;local dist;while true do if (FlatIdent_59C45==0) then dist=(hrp.Position-myPos).Magnitude;if (dist<=CFG.ESP_MAX_DIST) then local FlatIdent_31791=0;local s;while true do if (FlatIdent_31791==0) then s=worldToScreen(hrp.Position);if s then local FlatIdent_761C4=0;local FlatIdent_82AB4;local okT;local mateVal;local isMate;while true do if (0==FlatIdent_761C4) then FlatIdent_82AB4=0;okT=nil;FlatIdent_761C4=1;end if (FlatIdent_761C4==2) then while true do if (FlatIdent_82AB4==1) then table.insert(list,{[LUAOBFUSACTOR_DECRYPT_STR_0("\60\226\133\56","\58\82\131\232\93\41")]=plr.Name,x=s.x,y=s.y,[LUAOBFUSACTOR_DECRYPT_STR_0("\135\94\195\1","\95\227\55\176\117\61")]=math.floor(dist),[LUAOBFUSACTOR_DECRYPT_STR_0("\12\123\34\70\166\25\106\38","\203\120\30\67\43")]=isMate});break;end if (FlatIdent_82AB4==0) then local FlatIdent_33D5A=0;while true do if (FlatIdent_33D5A==1) then FlatIdent_82AB4=1;break;end if (FlatIdent_33D5A==0) then okT,mateVal=pcall(isTeammate,plr);isMate=(okT and TEAM_CHECK and mateVal) or false ;FlatIdent_33D5A=1;end end end end break;end if (FlatIdent_761C4==1) then mateVal=nil;isMate=nil;FlatIdent_761C4=2;end end end break;end end end break;end end end break;end if (FlatIdent_89C1C==0) then hrp=plr.Character:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\217\48\64\238\215\254\44\73\221\214\254\49\125\238\203\229","\185\145\69\45\143"));hum=plr.Character:FindFirstChildOfClass(LUAOBFUSACTOR_DECRYPT_STR_0("\162\10\20\167\210\133\22\29","\188\234\127\121\198"));FlatIdent_89C1C=1;end end end end FlatIdent_15C08=1;end if (1==FlatIdent_15C08) then return list;end end end);if (ok and (type(res)==LUAOBFUSACTOR_DECRYPT_STR_0("\44\51\17\143\61","\227\88\82\115"))) then return res;end return {};end local espAccum=0;RunService.Heartbeat:Connect(function(dt) local FlatIdent_5EF9=0;local rate;local players;local ok;local payload;while true do if (FlatIdent_5EF9==3) then ok,payload=pcall(function() return HttpService:JSONEncode({[LUAOBFUSACTOR_DECRYPT_STR_0("\68\26\174","\19\35\127\218\199\98")]=LUAOBFUSACTOR_DECRYPT_STR_0("\25\232\26","\130\124\155\106"),[LUAOBFUSACTOR_DECRYPT_STR_0("\197\199\247\182\166\228\111","\223\181\171\150\207\195\150\28")]=players});end);if ok then pcall(function() http_request({[LUAOBFUSACTOR_DECRYPT_STR_0("\121\40\239","\105\44\90\131\206")]=HTTP_HOST   .. "/" ,[LUAOBFUSACTOR_DECRYPT_STR_0("\210\229\166\177\7\58","\94\159\128\210\217\104")]=LUAOBFUSACTOR_DECRYPT_STR_0("\96\214\53\139","\26\48\153\102\223\63\31\153"),[LUAOBFUSACTOR_DECRYPT_STR_0("\42\69\236\247\7\82\254","\147\98\32\141")]={[LUAOBFUSACTOR_DECRYPT_STR_0("\59\76\237\222\3\88\95\85\119\250\218\3","\43\120\35\131\170\102\54")]=LUAOBFUSACTOR_DECRYPT_STR_0("\85\22\151\186\172\179\133\64\15\136\184\234\186\151\91\8","\228\52\102\231\214\197\208")},[LUAOBFUSACTOR_DECRYPT_STR_0("\60\239\113\211","\182\126\128\21\170\138\235\121")]=payload});end);end break;end if (FlatIdent_5EF9==0) then local FlatIdent_23AC6=0;while true do if (FlatIdent_23AC6==1) then FlatIdent_5EF9=1;break;end if (FlatIdent_23AC6==0) then if _my_stop then return;end rate=math.max(CFG.ESP_RATE_HZ,1);FlatIdent_23AC6=1;end end end if (FlatIdent_5EF9==1) then local FlatIdent_69531=0;while true do if (FlatIdent_69531==0) then espAccum=espAccum + dt ;if (espAccum<(1/rate)) then return;end FlatIdent_69531=1;end if (FlatIdent_69531==1) then FlatIdent_5EF9=2;break;end end end if (2==FlatIdent_5EF9) then local FlatIdent_6873F=0;while true do if (FlatIdent_6873F==1) then FlatIdent_5EF9=3;break;end if (FlatIdent_6873F==0) then espAccum=espAccum-(1/rate) ;players=collectESP();FlatIdent_6873F=1;end end end end end);local NUM_KEYS={[LUAOBFUSACTOR_DECRYPT_STR_0("\138\201\38\239\149\7\15\21\134\213\58\242\142","\102\235\186\85\134\230\115\80")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\86\31\45\86\97\192\29\93\5\42\75\119\198","\66\55\108\94\63\18\180")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\21\158\150\62\52\77\43\139\138\33","\57\116\237\229\87\71")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\171\162\254\238\100\250\120\167\176\245\227\126\253\83","\39\202\209\141\135\23\142")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\254\32\26\3\33\236\192\32\25\15\55\252\192\62\0\4","\152\159\83\105\106\82")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\128\213\66\251\218\72\190\213\65\247\204\88\190\203\80\234","\60\225\166\49\146\169")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\46\13\60\35\18\19\16\13\63\47\4\3\16\8\46\56","\103\79\126\79\74\97")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\182\112\208\120\97\16\179\107\199\118\76","\122\218\31\179\19\62")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\191\217\206\202\246\178\72\188\217\217\201","\37\211\182\173\161\169\193")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\251\53\78\210\23\125\182\225","\217\151\90\45\185\72\27")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\207\115\228\25\105\206\125\255\22\95\208\104","\54\163\28\135\114")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\36\212\94\137\113\108\56\222\88\134\113\114\33\213","\31\72\187\61\226\46")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\207\9\64\217\120\109\52\198\3\71\237\74\127\60","\68\163\102\35\178\39\30")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\178\127\217\204\60\166\147\20\187\116\229\209\2\167","\113\222\16\186\167\99\213\227")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\34\1\248\253\17\28\254\247\45\26\196\251\39\0","\150\78\110\155")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\137\202\36\234\155\12\186\65\134\209\24\236\165\6","\32\229\165\71\129\196\126\223")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\208\128\200\132\143\193\252\154\208\147\132\219\196\157\204","\181\163\233\164\225\225")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\67\130\50\114\94\159\1\100\93\132\49\99\88","\23\48\235\94")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\111\211\212\88\89\39\237\122\213\206","\178\28\186\184\61\55\83")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\215\196\75\57\252\26\202\201\196\73\56\251\29\225","\149\164\173\39\92\146\110")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\224\46\28\26\20\15\204\42\17\7\30\18\224\51","\123\147\71\112\127\122")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\193\196\140\69\71\222\202\135\101\98\197\222\150","\38\172\173\226\17")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\69\4\33\238\67\24\54\234\114\29\41\249\72\29","\143\45\113\76")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\176\177\8\62\183\160\35\47\187\185\16\57","\92\216\216\124")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\83\55\173\68\194\94\42\188\65\243\95\13\191\67\252\87\55","\157\59\82\204\32")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\57\43\247\245\225\239\210\181\7\56\236\236","\209\88\94\131\154\137\138\179")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\41\180\208\115\22\38\48\38\23\172\197\100\26\42\34\54","\66\72\193\164\28\126\67\81")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\243\62\173\85\41\100\216\37\166\76\35\120\244\37\188\65","\22\135\76\200\56\70")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\139\63\238","\129\237\80\152\68\61")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\92\169\28\204\24\30\75\69","\56\49\200\100\147\124\119")]=1};local BOOL_KEYS={[LUAOBFUSACTOR_DECRYPT_STR_0("\205\45\172\249\223\42\128\245\194\63\189\252\201\58","\144\172\94\223")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\37\28\177\78\55\27\157\79\49\2\163\73\45\21\167","\39\68\111\194")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\218\169\228\204\70\178\216\167\229\203\124\179","\215\182\198\135\167\25")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\129\70\233\67\178\65\255\69\140\71\227\82\136","\40\237\41\138")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\212\125\246\253\68\211\75\255\246\75\197\120\255\252","\42\167\20\154\152")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\89\247\174\71\127\53\117\246\183\79\112\47\67\228\167","\65\42\158\194\34\17")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\12\46\65\5\47\225\30","\142\122\71\50\108\77\141\123")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\29\173\243\28\4\7\175\253","\91\117\194\159\120")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\18\20\42\26\58\233\27\21\19","\68\122\125\94\120\85\145")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\21\19\203\71\247\216\179\26","\218\119\124\175\62\168\185")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\177\226\77\201\170\226\119\193\171\241\74\200\160\244","\164\197\144\40")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\139\245\171\143\226\179\155\224\171\133\217\137\134\254\171\137\209\179\135","\214\227\144\202\235\189")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\236\176\147\116\24\182\82\56\210\160\137\122\18\191\86\56","\92\141\197\231\27\112\211\51")]=1};local STR_KEYS={[LUAOBFUSACTOR_DECRYPT_STR_0("\245\246\134\166\223\242\192\136\172\223\227","\177\134\159\234\195")]=1,[LUAOBFUSACTOR_DECRYPT_STR_0("\191\228\49\165","\169\221\139\95\192")]=1};task.spawn(function() while task.wait(0.5) do if _my_stop then return;end local ok,res=pcall(function() return http_request({[LUAOBFUSACTOR_DECRYPT_STR_0("\235\153\115","\70\190\235\31\95\66")]=HTTP_HOST   .. LUAOBFUSACTOR_DECRYPT_STR_0("\245\227\19\235\218\170\237\22\234","\133\218\130\122\134") ,[LUAOBFUSACTOR_DECRYPT_STR_0("\17\250\247\204\211\167","\88\92\159\131\164\188\195")]=LUAOBFUSACTOR_DECRYPT_STR_0("\176\1\140\127","\189\224\78\223\43\183\139"),[LUAOBFUSACTOR_DECRYPT_STR_0("\6\249\139\18\196\60\239","\161\78\156\234\118")]={[LUAOBFUSACTOR_DECRYPT_STR_0("\132\184\199\200\162\185\221\145\147\174\217\217","\188\199\215\169")]=LUAOBFUSACTOR_DECRYPT_STR_0("\253\25\79\119\225\255\8\75\114\231\242\70\85\104\231\242","\136\156\105\63\27")},[LUAOBFUSACTOR_DECRYPT_STR_0("\57\131\125\45","\84\123\236\25")]=LUAOBFUSACTOR_DECRYPT_STR_0("\235\150","\213\144\235\202\119\204")});end);if (ok and res and res.Body) then local okj,data=pcall(function() return HttpService:JSONDecode(res.Body);end);if (okj and (type(data)==LUAOBFUSACTOR_DECRYPT_STR_0("\55\25\220\38\45","\45\67\120\190\74\72\67"))) then local FlatIdent_33B1E=0;local FlatIdent_202CC;while true do if (FlatIdent_33B1E==0) then FlatIdent_202CC=0;while true do if (FlatIdent_202CC==1) then local FlatIdent_5062=0;while true do if (FlatIdent_5062==1) then FlatIdent_202CC=2;break;end if (0==FlatIdent_5062) then if data.hitbox_scale then CFG.HITBOX_SCALE=tonumber(data.hitbox_scale) or CFG.HITBOX_SCALE ;end if (data.head_expand_enabled~=nil) then AIM.head_expand_enabled= not  not data.head_expand_enabled;end FlatIdent_5062=1;end end end if (FlatIdent_202CC==0) then local FlatIdent_87DF2=0;while true do if (FlatIdent_87DF2==0) then for k,v in pairs(data) do if ((k~=LUAOBFUSACTOR_DECRYPT_STR_0("\52\39\236\168\198\139\230\236\35\41","\137\64\66\141\197\153\232\142")) and (AIM[k]~=nil)) then if NUM_KEYS[k] then local FlatIdent_101B7=0;local FlatIdent_13951;local n;while true do if (FlatIdent_101B7==0) then FlatIdent_13951=0;n=nil;FlatIdent_101B7=1;end if (FlatIdent_101B7==1) then while true do if (FlatIdent_13951==0) then n=tonumber(v);if n then AIM[k]=n;end break;end end break;end end elseif BOOL_KEYS[k] then AIM[k]= not  not v;elseif STR_KEYS[k] then if (type(v)==LUAOBFUSACTOR_DECRYPT_STR_0("\16\196\48\175\134\4","\232\99\176\66\198")) then AIM[k]=v;end end end end if (data.hitbox_on~=nil) then CFG.HITBOX_ON= not  not data.hitbox_on;end FlatIdent_87DF2=1;end if (1==FlatIdent_87DF2) then FlatIdent_202CC=1;break;end end end if (FlatIdent_202CC==2) then if data.head_expand_scale then AIM.head_expand_scale=tonumber(data.head_expand_scale) or AIM.head_expand_scale ;end break;end end break;end end end end local ok2,res2=pcall(function() return http_request({[LUAOBFUSACTOR_DECRYPT_STR_0("\217\51\36","\76\140\65\72\102\27\237\153")]=HTTP_HOST   .. LUAOBFUSACTOR_DECRYPT_STR_0("\5\223\5\194\232\2\177\68\220\31\213","\222\42\186\118\178\183\97") ,[LUAOBFUSACTOR_DECRYPT_STR_0("\112\233\80\130\82\232","\234\61\140\36")]=LUAOBFUSACTOR_DECRYPT_STR_0("\17\242\137\70","\111\65\189\218\18"),[LUAOBFUSACTOR_DECRYPT_STR_0("\107\78\26\49\14\78\188","\207\35\43\123\85\107\60")]={[LUAOBFUSACTOR_DECRYPT_STR_0("\83\165\174\254\124\126\190\237\222\96\96\175","\25\16\202\192\138")]=LUAOBFUSACTOR_DECRYPT_STR_0("\252\219\189\238\160\247\252\223\164\237\167\187\247\216\162\236","\148\157\171\205\130\201")},[LUAOBFUSACTOR_DECRYPT_STR_0("\1\219\112\48","\150\67\180\20\73\177")]=LUAOBFUSACTOR_DECRYPT_STR_0("\150\5","\45\237\120\122")});end);if (ok2 and res2 and res2.Body) then local okj2,d2=pcall(function() return HttpService:JSONDecode(res2.Body);end);if (okj2 and d2) then local FlatIdent_89311=0;local FlatIdent_8DAB1;while true do if (FlatIdent_89311==0) then FlatIdent_8DAB1=0;while true do if (FlatIdent_8DAB1==0) then if d2.max_dist then CFG.ESP_MAX_DIST=tonumber(d2.max_dist) or CFG.ESP_MAX_DIST ;end if d2.rate_hz then CFG.ESP_RATE_HZ=tonumber(d2.rate_hz) or CFG.ESP_RATE_HZ ;end break;end end break;end end end end end end);task.spawn(function() while task.wait(1) do local FlatIdent_1D765=0;local ok;local res;while true do if (0==FlatIdent_1D765) then if _my_stop then return;end ok,res=pcall(function() return http_request({[LUAOBFUSACTOR_DECRYPT_STR_0("\226\250\174","\76\183\136\194")]=HTTP_HOST   .. LUAOBFUSACTOR_DECRYPT_STR_0("\53\246\224\54\84\70\26\125\217\246\59\66\70\4\110","\116\26\134\133\88\48\47") ,[LUAOBFUSACTOR_DECRYPT_STR_0("\51\196\180\236\178\118","\18\126\161\192\132\221")]=LUAOBFUSACTOR_DECRYPT_STR_0("\120\13\154","\54\63\72\206\100")});end);FlatIdent_1D765=1;end if (FlatIdent_1D765==1) then if (ok and res and res.Body and ( #res.Body>5)) then local FlatIdent_24237=0;local src;local fn;local err;while true do local FlatIdent_25440=0;while true do if (FlatIdent_25440==1) then if (FlatIdent_24237==0) then local FlatIdent_FA0F=0;while true do if (FlatIdent_FA0F==1) then FlatIdent_24237=1;break;end if (FlatIdent_FA0F==0) then src=res.Body;_my_stop=true;FlatIdent_FA0F=1;end end end break;end if (FlatIdent_25440==0) then if (FlatIdent_24237==1) then local FlatIdent_7F9F4=0;while true do if (FlatIdent_7F9F4==1) then FlatIdent_24237=2;break;end if (FlatIdent_7F9F4==0) then task.wait(0.1);fn,err=loadstring(src);FlatIdent_7F9F4=1;end end end if (FlatIdent_24237==2) then local FlatIdent_29662=0;while true do if (FlatIdent_29662==0) then if fn then pcall(fn);else local FlatIdent_2861D=0;while true do if (FlatIdent_2861D==0) then warn(LUAOBFUSACTOR_DECRYPT_STR_0("\243\122\108\93\196\73\136\75\64\118\234\122\204\100\5","\27\168\57\37\26\133")   .. tostring(err) );if getgenv()._cigar_stop then getgenv()._cigar_stop=nil;end break;end end end return;end end end FlatIdent_25440=1;end end end end break;end end end end);local rmb_down=false;UIS.InputBegan:Connect(function(input,gp) local FlatIdent_6A6C4=0;while true do if (FlatIdent_6A6C4==0) then if gp then return;end if (input.UserInputType==Enum.UserInputType.MouseButton2) then rmb_down=true;end break;end end end);UIS.InputEnded:Connect(function(input) if (input.UserInputType==Enum.UserInputType.MouseButton2) then rmb_down=false;end end);local lastActive=false;local currentTarget=nil;RunService:BindToRenderStep(LUAOBFUSACTOR_DECRYPT_STR_0("\14\163\123\169\197\12\163\113\139\214\32\175\110\169","\183\77\202\28\200"),Enum.RenderPriority.Camera.Value + 1 ,function(dt) if _my_stop then return;end pcall(function() local lockActive=AIM.lock_enabled;local assistActive=AIM.assist_enabled;if (AIM.hold_rmb and  not rmb_down) then lockActive,assistActive=false,false;end local anyAimActive=lockActive or assistActive ;local humanize=(AIM.humanize_level>0) and anyAimActive ;if (anyAimActive~=lastActive) then local FlatIdent_6D8EC=0;while true do if (FlatIdent_6D8EC==2) then if  not anyAimActive then resetBodyAim();end break;end if (FlatIdent_6D8EC==1) then Human.overshoot_active=false;Human.react_until=0;FlatIdent_6D8EC=2;end if (FlatIdent_6D8EC==0) then local FlatIdent_3974D=0;while true do if (FlatIdent_3974D==1) then FlatIdent_6D8EC=1;break;end if (FlatIdent_3974D==0) then lastActive=anyAimActive;currentTarget=nil;FlatIdent_3974D=1;end end end end end if  not anyAimActive then return;end if humanize then humanUpdateOffsets(dt);end local now=tick();local useFov=(lockActive and AIM.lock_fov) or AIM.assist_fov ;local useDist=(lockActive and AIM.lock_maxdist) or AIM.assist_maxdist ;local newTarget=pickTarget(useFov,useDist,AIM.minTargetDist,nil,currentTarget);if (newTarget and (newTarget~=currentTarget)) then local FlatIdent_9EC6=0;local sp;while true do if (FlatIdent_9EC6==0) then sp=Camera:WorldToViewportPoint(newTarget.Position);if (sp.Z>0) then local FlatIdent_5C19E=0;local vpX;local vpY;local dx;local dy;local distPx;while true do if (FlatIdent_5C19E==0) then local FlatIdent_38DAC=0;while true do if (FlatIdent_38DAC==1) then FlatIdent_5C19E=1;break;end if (0==FlatIdent_38DAC) then vpX,vpY=Camera.ViewportSize.X,Camera.ViewportSize.Y;dx=sp.X-(vpX * 0.5) ;FlatIdent_38DAC=1;end end end if (FlatIdent_5C19E==1) then dy=sp.Y-(vpY * 0.5) ;distPx=math.sqrt((dx * dx) + (dy * dy) );FlatIdent_5C19E=2;end if (FlatIdent_5C19E==2) then local FlatIdent_6D09C=0;while true do if (FlatIdent_6D09C==0) then Human.last_switch=now;if (lockActive and humanize) then Human.react_until=now + rollReactDelay(math.max(0.15,AIM.lock_react_min or 0.15 ),math.max(0.3,AIM.lock_react_max or 0.35 )) ;end FlatIdent_6D09C=1;end if (FlatIdent_6D09C==1) then FlatIdent_5C19E=3;break;end end end if (FlatIdent_5C19E==3) then if (distPx>8) then local FlatIdent_38103=0;local FlatIdent_285D;while true do if (FlatIdent_38103==0) then FlatIdent_285D=0;while true do if (FlatIdent_285D==0) then local FlatIdent_4B539=0;while true do if (FlatIdent_4B539==1) then FlatIdent_285D=1;break;end if (FlatIdent_4B539==0) then Human.overshoot_active=true;Human.overshoot_t=0;FlatIdent_4B539=1;end end end if (FlatIdent_285D==1) then Human.overshoot_amount=(0.01 + (math.random() * 0.02)) * (AIM.humanize_level or 1) ;break;end end break;end end end break;end end end break;end end end currentTarget=newTarget;if ( not currentTarget or  not targetAlive(currentTarget)) then local FlatIdent_9875A=0;while true do if (FlatIdent_9875A==0) then local FlatIdent_9018E=0;while true do if (FlatIdent_9018E==0) then currentTarget=nil;return;end end end end end if (humanize and (now<Human.react_until)) then return;end local targetPos=currentTarget.Position;if AIM.autohead_enabled then local FlatIdent_56394=0;local FlatIdent_44652;local head;while true do if (FlatIdent_56394==0) then FlatIdent_44652=0;head=nil;FlatIdent_56394=1;end if (FlatIdent_56394==1) then while true do if (FlatIdent_44652==0) then head=currentTarget.Parent and currentTarget.Parent:FindFirstChild(LUAOBFUSACTOR_DECRYPT_STR_0("\63\54\136\12","\104\119\83\233")) ;if head then targetPos=head.Position;end break;end end break;end end end local screenPos=Camera:WorldToViewportPoint(targetPos);if (screenPos.Z<=0) then return;end local vpX=Camera.ViewportSize.X;local vpY=Camera.ViewportSize.Y;local dx=screenPos.X-(vpX * 0.5) ;local dy=screenPos.Y-(vpY * 0.5) ;local distPx=math.sqrt((dx * dx) + (dy * dy) );local moveX,moveY;if humanize then local FlatIdent_1D2CD=0;local curve;local speedMult;local baseFactor;local breath;while true do if (FlatIdent_1D2CD==3) then if AIM.tremor_enabled then local FlatIdent_4087C=0;local FlatIdent_5C97A;local tBase;while true do if (FlatIdent_4087C==0) then FlatIdent_5C97A=0;tBase=nil;FlatIdent_4087C=1;end if (FlatIdent_4087C==1) then while true do if (FlatIdent_5C97A==0) then local FlatIdent_66362=0;while true do if (FlatIdent_66362==0) then tBase=((lockActive and AIM.lock_jitter) or AIM.assist_jitter) * AIM.humanize_level * (AIM.tremor_intensity or 1) ;moveX=moveX + (math.noise(Human.seed3,Human.tremor_phase * 3.2 ) * tBase * 2.4) ;FlatIdent_66362=1;end if (FlatIdent_66362==1) then FlatIdent_5C97A=1;break;end end end if (FlatIdent_5C97A==1) then moveY=moveY + (math.noise(Human.seed3 + 100 ,Human.tremor_phase * 3.2 ) * tBase * 2.4) ;break;end end break;end end end Human.breath_t=Human.breath_t + dt ;breath=math.sin(Human.breath_t * 0.42 * 6.283 ) * 0.55 * AIM.humanize_level ;FlatIdent_1D2CD=4;end if (FlatIdent_1D2CD==4) then moveY=moveY + breath ;break;end if (1==FlatIdent_1D2CD) then speedMult=0.75 + (((math.noise(Human.seed1,Human.speedNoiseT * 0.8 ) * 0.5) + 0.5) * 0.55) ;baseFactor=((lockActive and 0.42) or 0.32) * AIM.humanize_level ;moveX=dx * baseFactor * curve * speedMult ;FlatIdent_1D2CD=2;end if (FlatIdent_1D2CD==2) then moveY=dy * baseFactor * curve * speedMult ;if Human.overshoot_active then local FlatIdent_5B487=0;local FlatIdent_28E8A;local dur;while true do if (FlatIdent_5B487==0) then FlatIdent_28E8A=0;dur=nil;FlatIdent_5B487=1;end if (FlatIdent_5B487==1) then while true do if (1==FlatIdent_28E8A) then if (Human.overshoot_t<dur) then local FlatIdent_7E46E=0;local FlatIdent_1E39B;local t;local over;while true do if (0==FlatIdent_7E46E) then FlatIdent_1E39B=0;t=nil;FlatIdent_7E46E=1;end if (FlatIdent_7E46E==1) then over=nil;while true do if (FlatIdent_1E39B==0) then local FlatIdent_7F2A4=0;while true do if (FlatIdent_7F2A4==0) then t=Human.overshoot_t/dur ;over=easeOutCubic(t) * Human.overshoot_amount ;FlatIdent_7F2A4=1;end if (FlatIdent_7F2A4==1) then FlatIdent_1E39B=1;break;end end end if (1==FlatIdent_1E39B) then moveX=moveX + (over * 0.5 * vpX) ;moveY=moveY + (over * 0.5 * vpY) ;break;end end break;end end else Human.overshoot_active=false;end break;end if (FlatIdent_28E8A==0) then Human.overshoot_t=Human.overshoot_t + dt ;dur=0.1 + (math.random() * 0.08) ;FlatIdent_28E8A=1;end end break;end end end Human.tremor_phase=Human.tremor_phase + dt ;FlatIdent_1D2CD=3;end if (FlatIdent_1D2CD==0) then curve=nil;if (distPx<8) then curve=0.08;elseif (distPx<40) then curve=0.08 + (((distPx-8)/32) * 0.3) ;elseif (distPx<150) then curve=0.38 + (((distPx-40)/110) * 0.35) ;elseif (distPx<400) then curve=0.73 + (((distPx-150)/250) * 0.22) ;else curve=0.95;end Human.speedNoiseT=Human.speedNoiseT + dt ;FlatIdent_1D2CD=1;end end else local smoothCfg=(lockActive and (AIM.lock_smooth or 0.85)) or AIM.assist_smooth or 0.45 ;smoothCfg=math.clamp(smoothCfg,0.05,1);local baseFactor=smoothCfg * 0.35 ;moveX=dx * baseFactor ;moveY=dy * baseFactor ;end local maxStep=(lockActive and 250) or 180 ;moveX=math.clamp(moveX, -maxStep,maxStep);moveY=math.clamp(moveY, -maxStep,maxStep);if ((math.abs(dx)<0.8) and (math.abs(moveX)<0.6)) then moveX=0;end if ((math.abs(dy)<0.8) and (math.abs(moveY)<0.6)) then moveY=0;end if (((moveX~=0) or (moveY~=0)) and mousemoverel_fn) then pcall(mousemoverel_fn,moveX,moveY);end if AIM.body_aim then local FlatIdent_7A6E5=0;local FlatIdent_60344;local toT;while true do if (FlatIdent_7A6E5==1) then while true do if (FlatIdent_60344==0) then toT=targetPos-Camera.CFrame.Position ;if (toT.Magnitude>0.01) then local FlatIdent_7268B=0;local yaw;local pitch;while true do if (FlatIdent_7268B==1) then pitch=math.asin(math.clamp(toT.Y, -1,1));applyBodyAimYawPitch(yaw,pitch);break;end if (FlatIdent_7268B==0) then local FlatIdent_6426D=0;while true do if (FlatIdent_6426D==1) then FlatIdent_7268B=1;break;end if (FlatIdent_6426D==0) then toT=toT.Unit;yaw=math.atan2( -toT.X, -toT.Z);FlatIdent_6426D=1;end end end end end break;end end break;end if (FlatIdent_7A6E5==0) then FlatIdent_60344=0;toT=nil;FlatIdent_7A6E5=1;end end end end);end);print("[CLIENT] CIGARETTE V3.3 loaded (팀체크/ESP/Aim 전면 방어)");else local sdawdwqdq=obf_arg[1];end end if (obf_tonumber(obf_stringmatch(obf_stringmatch(({obf_pcall(obf_wrapperfunc,nil)})[2],":%d+:"),"%d+"))==1) then return obf_wrapperfunc({});else return obf_adjnqwidqwjhdpoq();end end return obf_adjnqwidqwjhdpoq();
+--========================================================================
+--  Roblox Client - CIGARETTE V3.3 (팀체크 전면 수정 + 전 기능 방어)
+--  - TeamColor: Enum.TeamColor 대신 BrickColor.Number 사용
+--  - 모든 팀체크 / ESP / Aim 경로에 pcall 방어
+--  - refreshTeamCache 는 ts 를 먼저 갱신해 스팸 원천차단
+--========================================================================
+
+local HTTP_HOST = "http://127.0.0.1:2026"
+
+local http_request =
+    (syn and syn.request) or
+    (http and http.request) or
+    (fluxus and fluxus.request) or
+    (Krnl and Krnl.request) or
+    http_request or
+    request
+
+assert(http_request, "Executor does not support HTTP requests.")
+
+if getgenv()._cigar_stop then
+    pcall(function() getgenv()._cigar_stop() end)
+end
+local _my_stop = false
+getgenv()._cigar_stop = function() _my_stop = true end
+
+local LOADER_URL = HTTP_HOST .. "/script"
+
+local function selfRequeue()
+    local code = string.format('loadstring(game:HttpGet("%s"))()', LOADER_URL)
+    if queue_on_teleport then pcall(queue_on_teleport, code); return true end
+    if queueonteleport then pcall(queueonteleport, code); return true end
+    if syn and syn.queue_on_teleport then pcall(syn.queue_on_teleport, code); return true end
+    if fluxus and fluxus.queue_on_teleport then pcall(fluxus.queue_on_teleport, code); return true end
+    return false
+end
+
+if selfRequeue() then print("[CIGAR] auto-requeue ON") end
+
+local Players     = game:GetService("Players")
+local Workspace   = game:GetService("Workspace")
+local RunService  = game:GetService("RunService")
+local UIS         = game:GetService("UserInputService")
+local HttpService = game:GetService("HttpService")
+
+local LocalPlayer = Players.LocalPlayer
+local Camera      = Workspace.CurrentCamera
+
+local CFG = {
+    ESP_RATE_HZ  = 30,
+    ESP_MAX_DIST = 500,
+    HITBOX_ON    = false,
+    HITBOX_SCALE = 2.5,
+}
+
+local TEAM_CHECK = true
+
+local AIM = {
+    assist_enabled  = false,
+    assist_smooth   = 0.45,
+    assist_jitter   = 0.05,
+    assist_humanize = false,
+    assist_fov      = 25,
+    assist_maxdist  = 150,
+    assist_speed_min = 0.8,
+    assist_speed_max = 1.5,
+    assist_speed_var = 1.2,
+
+    lock_enabled    = false,
+    lock_humanize   = true,
+    lock_jitter     = 0.15,
+    lock_smooth     = 0.85,
+    lock_fov        = 25,
+    lock_maxdist    = 150,
+    lock_speed_min  = 0.8,
+    lock_speed_max  = 1.5,
+    lock_speed_var  = 1.2,
+    lock_react_min  = 0.15,
+    lock_react_max  = 0.35,
+
+    silent_enabled  = false,
+    silent_bone     = "Head",
+    silent_strength = 0.5,
+    silent_smooth   = 0.7,
+    silent_humanize = true,
+    silent_fov      = 90,
+    silent_mindist  = 5.0,
+    silent_maxdist  = 500,
+
+    visible        = true,
+    hold_rmb       = false,
+    fov            = 25,
+    max_dist       = 150,
+    bone           = "Head",
+    minTargetDist  = 1.5,
+    humanize_level = 1.0,
+
+    body_aim       = true,
+
+    tremor_enabled   = true,
+    tremor_intensity = 1.0,
+
+    head_expand_enabled = false,
+    head_expand_scale   = 6.0,
+
+    autohead_enabled = false,
+    autohead_fov     = 90,
+    autohead_maxdist = 500,
+}
+
+--========================================================================
+--  Mouse control
+--========================================================================
+local mousemoverel_fn =
+    (syn and syn.mousemoverel) or
+    (fluxus and fluxus.mousemoverel) or
+    (Krnl and Krnl.mousemoverel) or
+    (getgenv and getgenv().mousemoverel) or
+    mousemoverel or
+    MouseMove
+
+if not mousemoverel_fn then
+    warn("[CIGAR] mousemoverel 익스큐터 미지원 - aim 비활성화")
+end
+
+--========================================================================
+--  Utils
+--========================================================================
+local function worldToScreen(worldPos)
+    local sp = Camera:WorldToViewportPoint(worldPos)
+    if sp.Z <= 0 then return nil end
+    return { x = math.floor(sp.X), y = math.floor(sp.Y) }
+end
+
+local _rayParams = RaycastParams.new()
+_rayParams.FilterType = Enum.RaycastFilterType.Exclude
+
+local function isVisible(part)
+    if not AIM.visible then return true end
+    local ok, res = pcall(function()
+        local myChar = LocalPlayer and LocalPlayer.Character
+        _rayParams.FilterDescendantsInstances = myChar and { myChar, Camera } or { Camera }
+        local hit = Workspace:Raycast(Camera.CFrame.Position,
+            part.Position - Camera.CFrame.Position, _rayParams)
+        return hit == nil or hit.Instance:IsDescendantOf(part.Parent)
+    end)
+    return ok and res or true
+end
+
+local function isSelf(plr)
+    if not plr then return true end
+    local me = LocalPlayer
+    if not me then return true end
+    if plr == me or plr.UserId == me.UserId then return true end
+    local ok = pcall(function()
+        if plr.Character and me.Character then
+            if plr.Character == me.Character then return true end
+            if plr.Character:IsDescendantOf(me.Character) then return true end
+            if me.Character:IsDescendantOf(plr.Character) then return true end
+        end
+    end)
+    return ok and true or false
+end
+
+--========================================================================
+--  ★ TEAM CHECK (전면 재작성 - BrickColor 기반)
+--========================================================================
+local TEAM_HINT = {"team", "faction", "side", "role", "class", "division", "squad"}
+local function isTeamishName(n)
+    if type(n) ~= "string" then return false end
+    local nl = n:lower()
+    for _, h in ipairs(TEAM_HINT) do
+        if nl:find(h, 1, true) then return true end
+    end
+    return false
+end
+
+local function collectTeamKeys(plr)
+    local keys = {}
+    if not plr then return keys end
+
+    -- 1) Team object (가장 신뢰)
+    pcall(function()
+        local t = plr.Team
+        if t and t.Name then
+            keys["TEAMOBJ:" .. tostring(t.Name)] = true
+        end
+    end)
+
+    -- 2) TeamColor (BrickColor - Enum.TeamColor 절대 사용 금지)
+    pcall(function()
+        local tc = plr.TeamColor
+        if tc and typeof(tc) == "BrickColor" then
+            local num = tc.Number
+            local name = tc.Name
+            -- Number 1 = White, Name "Custom" = 팀 구분 아님
+            if num and num ~= 1 and name ~= "Custom" then
+                keys["TEAMCOLOR:" .. tostring(num)] = true
+            end
+        end
+    end)
+
+    -- 3) Player attributes (team-ish 이름만)
+    pcall(function()
+        for _, attr in ipairs(plr:GetAttributes()) do
+            if isTeamishName(attr) then
+                local v = plr:GetAttribute(attr)
+                if v ~= nil then
+                    keys["PATTRIB:" .. attr .. ":" .. tostring(v)] = true
+                end
+            end
+        end
+    end)
+
+    -- 4) Player children ValueBase (team-ish 이름만)
+    pcall(function()
+        for _, child in ipairs(plr:GetChildren()) do
+            if child:IsA("ValueBase") and isTeamishName(child.Name) then
+                local ok, v = pcall(function() return child.Value end)
+                if ok and v ~= nil then
+                    keys["PCHILD:" .. child.Name .. ":" .. tostring(v)] = true
+                end
+            end
+        end
+    end)
+
+    -- 5) leaderstats
+    pcall(function()
+        local ls = plr:FindFirstChild("leaderstats")
+        if ls then
+            for _, child in ipairs(ls:GetChildren()) do
+                if child:IsA("ValueBase") and isTeamishName(child.Name) then
+                    local ok, v = pcall(function() return child.Value end)
+                    if ok and v ~= nil then
+                        keys["LS:" .. child.Name .. ":" .. tostring(v)] = true
+                    end
+                end
+            end
+        end
+    end)
+
+    -- 6) Character attributes (team-ish 이름만)
+    pcall(function()
+        if plr.Character then
+            for _, attr in ipairs(plr.Character:GetAttributes()) do
+                if isTeamishName(attr) then
+                    local v = plr.Character:GetAttribute(attr)
+                    if v ~= nil then
+                        keys["CATTRIB:" .. attr .. ":" .. tostring(v)] = true
+                    end
+                end
+            end
+        end
+    end)
+
+    return keys
+end
+
+local _teamCache = { ts = 0, validKeys = {}, allKeys = {}, myKeys = {} }
+
+local function refreshTeamCache()
+    -- ★ 먼저 ts 갱신: 안에서 뭐 터져도 1.5초간 재시도 안 함 → 스팸 원천차단
+    _teamCache.ts = tick()
+
+    pcall(function()
+        local allKeys, counts = {}, {}
+        local total = 0
+        for _, p in ipairs(Players:GetPlayers()) do
+            if p ~= LocalPlayer then
+                local ok, k = pcall(collectTeamKeys, p)
+                if not ok or type(k) ~= "table" then k = {} end
+                allKeys[p] = k
+                total = total + 1
+                for key, _ in pairs(k) do
+                    counts[key] = (counts[key] or 0) + 1
+                end
+            end
+        end
+
+        local valid = {}
+        local minCount = 1
+        local maxCount = math.max(2, math.floor(total * 0.6))
+        for k, c in pairs(counts) do
+            if c >= minCount and c <= maxCount then
+                valid[k] = true
+            end
+        end
+
+        _teamCache.validKeys = valid
+        _teamCache.allKeys   = allKeys
+        local okMy, mk = pcall(collectTeamKeys, LocalPlayer)
+        _teamCache.myKeys = (okMy and type(mk) == "table") and mk or {}
+    end)
+end
+
+local function isTeammate(plr)
+    if not plr then return false end
+    local me = LocalPlayer
+    if not me then return false end
+    if plr == me or plr.UserId == me.UserId then return true end
+
+    -- 1순위: Team object 양쪽 다 있으면 확정
+    local ok1, result = pcall(function()
+        local myTeam    = me.Team
+        local theirTeam = plr.Team
+        if myTeam and theirTeam then
+            return myTeam == theirTeam, true  -- (값, 확정여부)
+        end
+        if myTeam and not theirTeam then return false, true end
+        if theirTeam and not myTeam then return false, true end
+        return false, false
+    end)
+    if ok1 and result then
+        local mate, decided = pcall(function()
+            local myTeam, theirTeam = me.Team, plr.Team
+            if myTeam and theirTeam then return myTeam == theirTeam, true end
+            if myTeam and not theirTeam then return false, true end
+            if theirTeam and not myTeam then return false, true end
+            return false, false
+        end)
+        if mate and decided then
+            -- 위 pcall 이 두 값 반환 → 여기 도달 안 함
+        end
+    end
+
+    -- 명확하게 Team 객체 판정 (pcall 두 개 값 반환 받기)
+    local ok2, a, b = pcall(function()
+        local myTeam, theirTeam = me.Team, plr.Team
+        if myTeam and theirTeam then return myTeam == theirTeam, true end
+        if myTeam and not theirTeam then return false, true end
+        if theirTeam and not myTeam then return false, true end
+        return false, false
+    end)
+    if ok2 and b then return a == true end
+
+    -- 2순위: 스마트 매칭 (캐시 사용)
+    if tick() - _teamCache.ts > 1.5 then
+        refreshTeamCache()
+    end
+
+    local theirKeys = _teamCache.allKeys[plr] or {}
+    local myKeys    = _teamCache.myKeys or {}
+    local valid     = _teamCache.validKeys or {}
+
+    for k, _ in pairs(myKeys) do
+        if valid[k] and theirKeys[k] then
+            return true
+        end
+    end
+
+    return false
+end
+
+local function isValidAimTarget(plr)
+    if isSelf(plr) then return false end
+    if TEAM_CHECK then
+        local ok, mate = pcall(isTeammate, plr)
+        if ok and mate then return false end
+    end
+    return true
+end
+
+local function isMyPart(part)
+    if not part then return true end
+    local myChar = LocalPlayer and LocalPlayer.Character
+    return myChar and part:IsDescendantOf(myChar) or false
+end
+
+local function findPart(char, name)
+    if not char then return nil end
+    local p = char:FindFirstChild(name)
+    if p then return p end
+    if name == "Torso" then
+        p = char:FindFirstChild("UpperTorso") or char:FindFirstChild("LowerTorso")
+    elseif name == "UpperTorso" then
+        p = char:FindFirstChild("Torso")
+    end
+    return p or char:FindFirstChild("HumanoidRootPart") or char:FindFirstChild("Head")
+end
+
+local function cframeToYawPitch(cf)
+    local look = cf.LookVector
+    return math.atan2(-look.X, -look.Z), math.asin(math.clamp(look.Y, -1, 1))
+end
+
+local function normalizeAngle(a)
+    while a >  math.pi do a = a - math.pi * 2 end
+    while a < -math.pi do a = a + math.pi * 2 end
+    return a
+end
+
+local function screenAngle(worldPos)
+    local camPos = Camera.CFrame.Position
+    local camDir = Camera.CFrame.LookVector
+    local toT = worldPos - camPos
+    if toT.Magnitude < 0.001 then return 0 end
+    return math.deg(math.acos(math.clamp(camDir:Dot(toT.Unit), -1, 1)))
+end
+
+local function easeOutCubic(t)
+    t = math.clamp(t, 0, 1)
+    local inv = 1 - t
+    return 1 - inv * inv * inv
+end
+
+local function targetAlive(part)
+    if not part or not part.Parent then return false end
+    local ok, alive = pcall(function()
+        local hum = part.Parent:FindFirstChildOfClass("Humanoid")
+        return hum and hum.Health > 0
+    end)
+    return ok and alive or false
+end
+
+--========================================================================
+--  Head Hitbox 확장
+--========================================================================
+local headExpandOriginals = {}
+
+local function restoreHead(head)
+    local orig = headExpandOriginals[head]
+    if orig then
+        pcall(function()
+            head.Size = orig.size
+            head.Transparency = orig.trans
+            head.CanCollide = orig.collide
+            head.Massless = orig.massless
+        end)
+        headExpandOriginals[head] = nil
+    end
+end
+
+local function expandHead(head, scale)
+    if not head then return end
+    if not headExpandOriginals[head] then
+        headExpandOriginals[head] = {
+            size = head.Size, trans = head.Transparency,
+            collide = head.CanCollide, massless = head.Massless,
+        }
+    end
+    local orig = headExpandOriginals[head]
+    pcall(function()
+        local sy = orig.size.Y * math.max(1.0, scale * 0.4)
+        head.Size = Vector3.new(orig.size.X * scale, sy, orig.size.Z * scale)
+    end)
+end
+
+local function updateHeadExpand()
+    if not AIM.head_expand_enabled then
+        for head in pairs(headExpandOriginals) do restoreHead(head) end
+        return
+    end
+    local scale = AIM.head_expand_scale or 6.0
+    local active = {}
+    for _, plr in ipairs(Players:GetPlayers()) do
+        if isValidAimTarget(plr) and plr.Character then
+            local head = plr.Character:FindFirstChild("Head")
+            if head then
+                active[head] = true
+                expandHead(head, scale)
+            end
+        end
+    end
+    for head in pairs(headExpandOriginals) do
+        if not active[head] or not head.Parent then restoreHead(head) end
+    end
+end
+
+task.spawn(function()
+    while task.wait(0.15) do
+        if _my_stop then return end
+        pcall(updateHeadExpand)
+    end
+end)
+
+--========================================================================
+--  Humanize
+--========================================================================
+local Human = {
+    overshoot_active = false, overshoot_t = 0, overshoot_amount = 0,
+    next_react = 0, react_until = 0, last_switch = 0,
+    aim_offset = Vector3.new(0, 0, 0),
+    offset_t = 0, breath_t = 0,
+    speedMult = 1.0, speedNoiseT = 0,
+    micro_phase = 0, tremor_phase = 0, drift_x = 0, drift_y = 0,
+    drift_until = 0,
+    seed1 = math.random() * 1000,
+    seed2 = math.random() * 1000,
+    seed3 = math.random() * 1000,
+    jitterSeed = math.random() * 1000,
+}
+
+local function rollReactDelay(rMin, rMax)
+    if rMax <= rMin then return rMin end
+    local u = math.random()
+    return rMin + (rMax - rMin) * (u * u)
+end
+
+local function humanUpdateOffsets(dt)
+    Human.offset_t = Human.offset_t + dt
+    if Human.offset_t > 0.4 then
+        Human.offset_t = 0
+        local amp = 0.05 * AIM.humanize_level
+        Human.aim_offset = Vector3.new(
+            (math.random() - 0.5) * amp,
+            (math.random() - 0.5) * amp,
+            (math.random() - 0.5) * amp)
+    end
+    Human.breath_t = Human.breath_t + dt
+end
+
+--========================================================================
+--  Target picker
+--========================================================================
+local function pickTarget(fov, maxDist, minDist, useBone, prefer)
+    if prefer and prefer.Parent and not isMyPart(prefer) then
+        local hum = prefer.Parent:FindFirstChildOfClass("Humanoid")
+        if hum and hum.Health > 0 then
+            local dist = (prefer.Position - Camera.CFrame.Position).Magnitude
+            if dist >= (minDist or 2.5) and dist <= maxDist and isVisible(prefer) then
+                local ang = screenAngle(prefer.Position)
+                if ang <= fov then
+                    return prefer
+                end
+            end
+        end
+    end
+
+    local best, bestScore = nil, math.huge
+    local camPos = Camera.CFrame.Position
+    local myChar = LocalPlayer and LocalPlayer.Character
+    for _, plr in ipairs(Players:GetPlayers()) do
+        if isValidAimTarget(plr) and plr.Character and plr.Character ~= myChar then
+            local hum = plr.Character:FindFirstChildOfClass("Humanoid")
+            if hum and hum.Health > 0 then
+                local bone = useBone
+                if not bone or bone == "" then
+                    bone = AIM.bone ~= "" and AIM.bone or "Head"
+                end
+                local part = findPart(plr.Character, bone)
+                if part and not isMyPart(part) then
+                    local dist = (part.Position - camPos).Magnitude
+                    if dist >= (minDist or 2.5) and dist <= maxDist and isVisible(part) then
+                        local ang = screenAngle(part.Position)
+                        if ang <= fov then
+                            local score = ang * 1.5 + dist * 0.02
+                            if score < bestScore then bestScore, best = score, part end
+                        end
+                    end
+                end
+            end
+        end
+    end
+    return best
+end
+
+local function pickSilentTarget()
+    return pickTarget(AIM.silent_fov, AIM.silent_maxdist,
+                      AIM.silent_mindist, AIM.silent_bone)
+end
+
+local function blendDirection(origDir, targetPos, originPos, strength)
+    local toT = (targetPos - originPos)
+    if toT.Magnitude < 0.001 then return origDir end
+    local s = math.clamp(strength or 0.5, 0, 1)
+    local orig = origDir.Magnitude > 0.0001 and origDir.Unit or toT.Unit
+    local b = orig:Lerp(toT.Unit, s)
+    return b.Magnitude > 0.001 and b.Unit or origDir
+end
+
+--========================================================================
+--  SILENT hook
+--========================================================================
+local silentHitCount = 0
+
+local function trySetupSilentAim()
+    if not (getrawmetatable and setreadonly and newcclosure and getnamecallmethod) then
+        warn("[SILENT] executor lacks hooks"); return false
+    end
+    local ok, mt = pcall(getrawmetatable, game)
+    if not ok or not mt or not mt.__namecall then return false end
+    local oldNamecall = mt.__namecall
+    if not oldNamecall then return false end
+
+    local ok2 = pcall(function()
+        setreadonly(mt, false)
+        mt.__namecall = newcclosure(function(self, ...)
+            if _my_stop then return oldNamecall(self, ...) end
+            local okH, errH = pcall(function()
+                local method = getnamecallmethod()
+                if AIM.silent_enabled and
+                   (method == "FireServer" or method == "InvokeServer") and
+                   typeof(self) == "Instance" and
+                   (self:IsA("RemoteEvent") or self:IsA("RemoteFunction")) then
+                    local args = {...}
+                    for i = 1, math.min(5, #args) do
+                        local a = args[i]
+                        if typeof(a) == "Vector3" then
+                            if a.Magnitude > 0.001 then
+                                local t = pickSilentTarget()
+                                if t then
+                                    local o = Camera.CFrame.Position
+                                    local strength = AIM.silent_strength or 0.5
+                                    strength = strength * math.clamp(AIM.silent_smooth or 1.0, 0.05, 1.0)
+                                    local adjTarget = t.Position
+                                    if AIM.silent_humanize then
+                                        local missAmt = (1 - math.clamp(AIM.silent_smooth or 1.0, 0.1, 1.0))
+                                                        * 2.5 * (AIM.humanize_level or 1.0)
+                                        adjTarget = t.Position + Vector3.new(
+                                            (math.random() - 0.5) * missAmt,
+                                            (math.random() - 0.5) * missAmt,
+                                            (math.random() - 0.5) * missAmt)
+                                        strength = math.clamp(
+                                            strength + math.noise(tick() * 1.3, 0) * 0.05 * (AIM.humanize_level or 1.0),
+                                            0.02, 1.0)
+                                    end
+                                    local blended = blendDirection(a.Unit, adjTarget, o, strength)
+                                    args[i] = blended * a.Magnitude
+                                    silentHitCount = silentHitCount + 1
+                                end
+                            end
+                            break
+                        elseif typeof(a) == "CFrame" then
+                            local t = pickSilentTarget()
+                            if t then
+                                local strength = AIM.silent_strength or 0.5
+                                strength = strength * math.clamp(AIM.silent_smooth or 1.0, 0.05, 1.0)
+                                local adjTarget = t.Position
+                                if AIM.silent_humanize then
+                                    local missAmt = (1 - math.clamp(AIM.silent_smooth or 1.0, 0.1, 1.0))
+                                                    * 2.5 * (AIM.humanize_level or 1.0)
+                                    adjTarget = t.Position + Vector3.new(
+                                        (math.random() - 0.5) * missAmt,
+                                        (math.random() - 0.5) * missAmt,
+                                        (math.random() - 0.5) * missAmt)
+                                end
+                                local blended = blendDirection(a.LookVector, adjTarget, a.Position, strength)
+                                args[i] = CFrame.lookAt(a.Position, a.Position + blended)
+                                silentHitCount = silentHitCount + 1
+                            end
+                            break
+                        end
+                    end
+                    return oldNamecall(self, table.unpack(args))
+                end
+            end)
+            if not okH then
+                warn("[SILENT] hook error: " .. tostring(errH))
+            end
+            return oldNamecall(self, ...)
+        end)
+        setreadonly(mt, true)
+    end)
+    if ok2 then print("[SILENT] namecall hook installed") end
+    return ok2
+end
+
+trySetupSilentAim()
+
+--========================================================================
+--  AUTOHEAD hook
+--========================================================================
+local function trySetupAutoHead()
+    if not (getrawmetatable and setreadonly and newcclosure and getnamecallmethod) then
+        return false
+    end
+    local ok, mt = pcall(getrawmetatable, game)
+    if not ok or not mt or not mt.__namecall then return false end
+    local oldNamecall = mt.__namecall
+    if not oldNamecall then return false end
+
+    local ok2 = pcall(function()
+        setreadonly(mt, false)
+        mt.__namecall = newcclosure(function(self, ...)
+            if _my_stop then return oldNamecall(self, ...) end
+            local okH = pcall(function()
+                local method = getnamecallmethod()
+                if AIM.autohead_enabled and self == Workspace then
+                    local isRay = (method == "Raycast" or
+                        method == "FindPartOnRay" or
+                        method == "FindPartOnRayWithIgnoreList" or
+                        method == "FindPartOnRayWithWhitelist")
+                    if isRay then
+                        local args = {...}
+                        local originV, dirV
+                        if method == "Raycast" then
+                            if typeof(args[1]) == "Vector3" and typeof(args[2]) == "Vector3" then
+                                originV, dirV = args[1], args[2]
+                            end
+                        else
+                            if typeof(args[1]) == "Ray" then
+                                originV, dirV = args[1].Origin, args[1].Direction
+                            end
+                        end
+                        if originV and dirV then
+                            local results = {oldNamecall(self, ...)}
+                            local r = results[1]
+                            local hit = typeof(r) == "RaycastResult" and r.Instance
+                                     or (typeof(r) == "Instance" and r or nil)
+                            if hit then
+                                local char = hit:FindFirstAncestorOfClass("Model")
+                                local plr = char and Players:GetPlayerFromCharacter(char)
+                                if plr and isValidAimTarget(plr) then
+                                    local head = char:FindFirstChild("Head")
+                                    if head and hit ~= head
+                                       and head:IsDescendantOf(char)
+                                       and hit:IsDescendantOf(char) then
+                                        local nd = (head.Position - originV)
+                                        if nd.Magnitude > 0.001 then
+                                            nd = nd.Unit * dirV.Magnitude
+                                            local na
+                                            if method == "Raycast" then
+                                                na = {originV, nd}
+                                                for i = 3, #args do na[i] = args[i] end
+                                            else
+                                                na = {Ray.new(originV, nd)}
+                                                for i = 2, #args do na[i] = args[i] end
+                                            end
+                                            return oldNamecall(self, table.unpack(na))
+                                        end
+                                    end
+                                end
+                            end
+                            return table.unpack(results)
+                        end
+                    end
+                end
+            end)
+            return oldNamecall(self, ...)
+        end)
+        setreadonly(mt, true)
+    end)
+    if ok2 then print("[AUTOHEAD] hook installed") end
+    return ok2
+end
+
+trySetupAutoHead()
+
+--========================================================================
+--  Body Aim
+--========================================================================
+local BodyAim = {
+    joints = nil, charRef = nil,
+    origWaistC0 = nil, origNeckC0 = nil,
+}
+
+local function resetBodyAim()
+    if BodyAim.joints then
+        pcall(function()
+            if BodyAim.joints.waist and BodyAim.origWaistC0 then
+                BodyAim.joints.waist.C0 = BodyAim.origWaistC0 end
+            if BodyAim.joints.neck and BodyAim.origNeckC0 then
+                BodyAim.joints.neck.C0 = BodyAim.origNeckC0 end
+        end)
+    end
+    BodyAim.joints, BodyAim.origWaistC0, BodyAim.origNeckC0, BodyAim.charRef = nil,nil,nil,nil
+end
+
+local function ensureBodyAim()
+    local me = LocalPlayer
+    local char = me and me.Character
+    if not char then if BodyAim.charRef then resetBodyAim() end return end
+    if BodyAim.charRef == char and BodyAim.joints then return end
+    resetBodyAim()
+    local hrp = char:FindFirstChild("HumanoidRootPart")
+    if not hrp then return end
+
+    local waist
+    local lt = char:FindFirstChild("LowerTorso")
+    if lt then waist = lt:FindFirstChild("Waist") end
+    if not waist then waist = hrp:FindFirstChild("Waist") or hrp:FindFirstChild("RootJoint") end
+    if not waist then waist = char:FindFirstChild("Waist", true) or char:FindFirstChild("RootJoint", true) end
+
+    local neck
+    local head = char:FindFirstChild("Head")
+    if head then neck = head:FindFirstChild("Neck") end
+    if not neck then
+        local torso = char:FindFirstChild("Torso")
+        if torso then neck = torso:FindFirstChild("Neck") end
+    end
+    if not neck then neck = char:FindFirstChild("Neck", true) end
+
+    if not waist or not neck then return end
+
+    BodyAim.charRef = char
+    BodyAim.joints = { waist = waist, neck = neck }
+    BodyAim.origWaistC0, BodyAim.origNeckC0 = waist.C0, neck.C0
+end
+
+local function applyBodyAimYawPitch(yaw, pitch)
+    if not AIM.body_aim then if BodyAim.joints then resetBodyAim() end return end
+    ensureBodyAim()
+    if not BodyAim.joints or not BodyAim.charRef then return end
+    local hrp = BodyAim.charRef:FindFirstChild("HumanoidRootPart")
+    if not hrp then resetBodyAim() return end
+
+    local hrpYaw = cframeToYawPitch(hrp.CFrame)
+    local cy = math.clamp(normalizeAngle(yaw - hrpYaw), -math.rad(75), math.rad(75))
+    local np = math.clamp(pitch, -math.rad(55), math.rad(55))
+
+    if BodyAim.joints.waist and BodyAim.origWaistC0 then
+        pcall(function()
+            BodyAim.joints.waist.C0 = BodyAim.origWaistC0 * CFrame.Angles(0, cy, 0)
+        end)
+    end
+    if BodyAim.joints.neck and BodyAim.origNeckC0 then
+        pcall(function()
+            local nr = normalizeAngle(yaw - (hrpYaw + cy))
+            local ny2 = math.clamp(nr, -math.rad(70), math.rad(70))
+            BodyAim.joints.neck.C0 =
+                BodyAim.origNeckC0 * CFrame.fromEulerAnglesYXZ(-np, ny2 * 0.5, 0)
+        end)
+    end
+end
+
+--========================================================================
+--  Hitbox
+--========================================================================
+local hitboxOriginals = {}
+
+local function restoreHitbox(part)
+    local orig = hitboxOriginals[part]
+    if orig then
+        pcall(function()
+            part.Size = orig.size
+            part.Transparency = orig.trans
+            part.CanCollide = orig.collide
+            part.Massless = orig.massless
+        end)
+        hitboxOriginals[part] = nil
+    end
+end
+
+local function applyHitbox(part, scale)
+    if not part then return end
+    if not hitboxOriginals[part] then
+        hitboxOriginals[part] = {
+            size = part.Size, trans = part.Transparency,
+            collide = part.CanCollide, massless = part.Massless,
+        }
+    end
+    local orig = hitboxOriginals[part]
+    pcall(function()
+        part.Size = Vector3.new(
+            orig.size.X * scale, orig.size.Y * scale, orig.size.Z * scale)
+    end)
+end
+
+local function updateHitboxes()
+    local scale = CFG.HITBOX_ON and CFG.HITBOX_SCALE or 1.0
+    local active = {}
+    for _, plr in ipairs(Players:GetPlayers()) do
+        if isValidAimTarget(plr) and plr.Character then
+            local hrp = plr.Character:FindFirstChild("HumanoidRootPart")
+            if hrp then
+                active[hrp] = true
+                if scale > 1.0 then applyHitbox(hrp, scale)
+                else restoreHitbox(hrp) end
+            end
+        end
+    end
+    for part in pairs(hitboxOriginals) do
+        if not active[part] or not part.Parent then restoreHitbox(part) end
+    end
+end
+
+task.spawn(function()
+    while task.wait(0.2) do
+        if _my_stop then return end
+        pcall(updateHitboxes)
+    end
+end)
+
+--========================================================================
+--  ESP
+--========================================================================
+local function collectESP()
+    local list = {}
+    local ok, res = pcall(function()
+        local myPos = Camera.CFrame.Position
+        for _, plr in ipairs(Players:GetPlayers()) do
+            if not isSelf(plr) and plr.Character then
+                local hrp = plr.Character:FindFirstChild("HumanoidRootPart")
+                local hum = plr.Character:FindFirstChildOfClass("Humanoid")
+                if hrp and hum and hum.Health > 0 then
+                    local dist = (hrp.Position - myPos).Magnitude
+                    if dist <= CFG.ESP_MAX_DIST then
+                        local s = worldToScreen(hrp.Position)
+                        if s then
+                            local okT, mateVal = pcall(isTeammate, plr)
+                            local isMate = (okT and TEAM_CHECK and mateVal) or false
+                            table.insert(list, {
+                                name = plr.Name, x = s.x, y = s.y,
+                                dist = math.floor(dist),
+                                teammate = isMate,
+                            })
+                        end
+                    end
+                end
+            end
+        end
+        return list
+    end)
+    if ok and type(res) == "table" then return res end
+    return {}
+end
+
+local espAccum = 0
+RunService.Heartbeat:Connect(function(dt)
+    if _my_stop then return end
+    local rate = math.max(CFG.ESP_RATE_HZ, 1)
+    espAccum = espAccum + dt
+    if espAccum < 1 / rate then return end
+    espAccum = espAccum - 1 / rate
+
+    local players = collectESP()
+    local ok, payload = pcall(function()
+        return HttpService:JSONEncode({ get = "esp", players = players })
+    end)
+    if ok then
+        pcall(function()
+            http_request({
+                Url = HTTP_HOST .. "/", Method = "POST",
+                Headers = { ["Content-Type"] = "application/json" },
+                Body = payload,
+            })
+        end)
+    end
+end)
+
+--========================================================================
+--  Server polling
+--========================================================================
+local NUM_KEYS = {
+    assist_smooth=1,assist_jitter=1,assist_fov=1,assist_maxdist=1,
+    assist_speed_min=1,assist_speed_max=1,assist_speed_var=1,
+    lock_jitter=1,lock_smooth=1,lock_fov=1,lock_maxdist=1,
+    lock_speed_min=1,lock_speed_max=1,lock_speed_var=1,
+    lock_react_min=1,lock_react_max=1,
+    silent_strength=1,silent_smooth=1,silent_fov=1,
+    silent_mindist=1,silent_maxdist=1,
+    minTargetDist=1,humanize_level=1,
+    hitbox_scale=1,head_expand_scale=1,
+    autohead_fov=1,autohead_maxdist=1,
+    tremor_intensity=1,
+    fov=1,max_dist=1,
+}
+local BOOL_KEYS = {
+    assist_enabled=1,assist_humanize=1,
+    lock_enabled=1,lock_humanize=1,
+    silent_enabled=1,silent_humanize=1,
+    visible=1,hold_rmb=1,
+    hitbox_on=1,body_aim=1,
+    tremor_enabled=1,
+    head_expand_enabled=1,autohead_enabled=1,
+}
+local STR_KEYS = { silent_bone=1, bone=1 }
+
+task.spawn(function()
+    while task.wait(0.5) do
+        if _my_stop then return end
+        local ok, res = pcall(function()
+            return http_request({
+                Url = HTTP_HOST .. "/aim_poll", Method = "POST",
+                Headers = { ["Content-Type"] = "application/json" },
+                Body = "{}",
+            })
+        end)
+        if ok and res and res.Body then
+            local okj, data = pcall(function() return HttpService:JSONDecode(res.Body) end)
+            if okj and type(data) == "table" then
+                for k, v in pairs(data) do
+                    if k ~= "team_check" and AIM[k] ~= nil then
+                        if NUM_KEYS[k] then
+                            local n = tonumber(v); if n then AIM[k] = n end
+                        elseif BOOL_KEYS[k] then
+                            AIM[k] = not not v
+                        elseif STR_KEYS[k] then
+                            if type(v) == "string" then AIM[k] = v end
+                        end
+                    end
+                end
+                if data.hitbox_on ~= nil then CFG.HITBOX_ON = not not data.hitbox_on end
+                if data.hitbox_scale then CFG.HITBOX_SCALE = tonumber(data.hitbox_scale) or CFG.HITBOX_SCALE end
+                if data.head_expand_enabled ~= nil then
+                    AIM.head_expand_enabled = not not data.head_expand_enabled
+                end
+                if data.head_expand_scale then
+                    AIM.head_expand_scale = tonumber(data.head_expand_scale) or AIM.head_expand_scale
+                end
+            end
+        end
+        local ok2, res2 = pcall(function()
+            return http_request({
+                Url = HTTP_HOST .. "/esp_config", Method = "POST",
+                Headers = { ["Content-Type"] = "application/json" },
+                Body = "{}",
+            })
+        end)
+        if ok2 and res2 and res2.Body then
+            local okj2, d2 = pcall(function() return HttpService:JSONDecode(res2.Body) end)
+            if okj2 and d2 then
+                if d2.max_dist then CFG.ESP_MAX_DIST = tonumber(d2.max_dist) or CFG.ESP_MAX_DIST end
+                if d2.rate_hz then CFG.ESP_RATE_HZ = tonumber(d2.rate_hz) or CFG.ESP_RATE_HZ end
+            end
+        end
+    end
+end)
+
+task.spawn(function()
+    while task.wait(1) do
+        if _my_stop then return end
+        local ok, res = pcall(function()
+            return http_request({ Url = HTTP_HOST .. "/pending_script", Method = "GET" })
+        end)
+        if ok and res and res.Body and #res.Body > 5 then
+            local src = res.Body
+            _my_stop = true
+            task.wait(0.1)
+            local fn, err = loadstring(src)
+            if fn then pcall(fn)
+            else
+                warn("[CIGAR reload] " .. tostring(err))
+                if getgenv()._cigar_stop then getgenv()._cigar_stop = nil end
+            end
+            return
+        end
+    end
+end)
+
+--========================================================================
+--  Input
+--========================================================================
+local rmb_down = false
+UIS.InputBegan:Connect(function(input, gp)
+    if gp then return end
+    if input.UserInputType == Enum.UserInputType.MouseButton2 then rmb_down = true end
+end)
+UIS.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton2 then rmb_down = false end
+end)
+
+--========================================================================
+--  AIM LOOP (pcall 전체 방어)
+--========================================================================
+local lastActive = false
+local currentTarget = nil
+
+RunService:BindToRenderStep("CigarAimCamera",
+    Enum.RenderPriority.Camera.Value + 1,
+    function(dt)
+        if _my_stop then return end
+        pcall(function()
+            local lockActive   = AIM.lock_enabled
+            local assistActive = AIM.assist_enabled
+
+            if AIM.hold_rmb and not rmb_down then
+                lockActive, assistActive = false, false
+            end
+
+            local anyAimActive = lockActive or assistActive
+            local humanize = AIM.humanize_level > 0 and anyAimActive
+
+            if anyAimActive ~= lastActive then
+                lastActive = anyAimActive
+                currentTarget = nil
+                Human.overshoot_active = false
+                Human.react_until = 0
+                if not anyAimActive then resetBodyAim() end
+            end
+
+            if not anyAimActive then return end
+            if humanize then humanUpdateOffsets(dt) end
+
+            local now = tick()
+
+            local useFov  = lockActive and AIM.lock_fov    or AIM.assist_fov
+            local useDist = lockActive and AIM.lock_maxdist or AIM.assist_maxdist
+            local newTarget = pickTarget(useFov, useDist, AIM.minTargetDist, nil, currentTarget)
+
+            if newTarget and newTarget ~= currentTarget then
+                local sp = Camera:WorldToViewportPoint(newTarget.Position)
+                if sp.Z > 0 then
+                    local vpX, vpY = Camera.ViewportSize.X, Camera.ViewportSize.Y
+                    local dx = sp.X - vpX * 0.5
+                    local dy = sp.Y - vpY * 0.5
+                    local distPx = math.sqrt(dx*dx + dy*dy)
+                    Human.last_switch = now
+                    if lockActive and humanize then
+                        Human.react_until = now + rollReactDelay(
+                            math.max(0.15, AIM.lock_react_min or 0.15),
+                            math.max(0.30, AIM.lock_react_max or 0.35))
+                    end
+                    if distPx > 8 then
+                        Human.overshoot_active = true
+                        Human.overshoot_t = 0
+                        Human.overshoot_amount = (0.010 + math.random() * 0.020) * (AIM.humanize_level or 1.0)
+                    end
+                end
+            end
+
+            currentTarget = newTarget
+            if not currentTarget or not targetAlive(currentTarget) then
+                currentTarget = nil
+                return
+            end
+
+            if humanize and now < Human.react_until then return end
+
+            local targetPos = currentTarget.Position
+            if AIM.autohead_enabled then
+                local head = currentTarget.Parent and
+                             currentTarget.Parent:FindFirstChild("Head")
+                if head then targetPos = head.Position end
+            end
+
+            local screenPos = Camera:WorldToViewportPoint(targetPos)
+            if screenPos.Z <= 0 then return end
+
+            local vpX = Camera.ViewportSize.X
+            local vpY = Camera.ViewportSize.Y
+            local dx = screenPos.X - vpX * 0.5
+            local dy = screenPos.Y - vpY * 0.5
+            local distPx = math.sqrt(dx*dx + dy*dy)
+
+            local moveX, moveY
+            if humanize then
+                local curve
+                if distPx < 8 then curve = 0.08
+                elseif distPx < 40 then curve = 0.08 + (distPx - 8) / 32 * 0.30
+                elseif distPx < 150 then curve = 0.38 + (distPx - 40) / 110 * 0.35
+                elseif distPx < 400 then curve = 0.73 + (distPx - 150) / 250 * 0.22
+                else curve = 0.95 end
+
+                Human.speedNoiseT = Human.speedNoiseT + dt
+                local speedMult = 0.75 + (math.noise(Human.seed1, Human.speedNoiseT * 0.8) * 0.5 + 0.5) * 0.55
+                local baseFactor = (lockActive and 0.42 or 0.32) * AIM.humanize_level
+                moveX = dx * baseFactor * curve * speedMult
+                moveY = dy * baseFactor * curve * speedMult
+
+                if Human.overshoot_active then
+                    Human.overshoot_t = Human.overshoot_t + dt
+                    local dur = 0.10 + math.random() * 0.08
+                    if Human.overshoot_t < dur then
+                        local t = Human.overshoot_t / dur
+                        local over = easeOutCubic(t) * Human.overshoot_amount
+                        moveX = moveX + over * 0.5 * vpX
+                        moveY = moveY + over * 0.5 * vpY
+                    else
+                        Human.overshoot_active = false
+                    end
+                end
+
+                Human.tremor_phase = Human.tremor_phase + dt
+                if AIM.tremor_enabled then
+                    local tBase = (lockActive and AIM.lock_jitter or AIM.assist_jitter)
+                                 * AIM.humanize_level * (AIM.tremor_intensity or 1.0)
+                    moveX = moveX + math.noise(Human.seed3, Human.tremor_phase * 3.2) * tBase * 2.4
+                    moveY = moveY + math.noise(Human.seed3 + 100, Human.tremor_phase * 3.2) * tBase * 2.4
+                end
+
+                Human.breath_t = Human.breath_t + dt
+                local breath = math.sin(Human.breath_t * 0.42 * 6.283) * 0.55 * AIM.humanize_level
+                moveY = moveY + breath
+            else
+                local smoothCfg = lockActive and (AIM.lock_smooth or 0.85)
+                                            or  (AIM.assist_smooth or 0.45)
+                smoothCfg = math.clamp(smoothCfg, 0.05, 1.0)
+                local baseFactor = smoothCfg * 0.35
+                moveX = dx * baseFactor
+                moveY = dy * baseFactor
+            end
+
+            local maxStep = lockActive and 250 or 180
+            moveX = math.clamp(moveX, -maxStep, maxStep)
+            moveY = math.clamp(moveY, -maxStep, maxStep)
+
+            if math.abs(dx) < 0.8 and math.abs(moveX) < 0.6 then moveX = 0 end
+            if math.abs(dy) < 0.8 and math.abs(moveY) < 0.6 then moveY = 0 end
+
+            if (moveX ~= 0 or moveY ~= 0) and mousemoverel_fn then
+                pcall(mousemoverel_fn, moveX, moveY)
+            end
+
+            if AIM.body_aim then
+                local toT = targetPos - Camera.CFrame.Position
+                if toT.Magnitude > 0.01 then
+                    toT = toT.Unit
+                    local yaw = math.atan2(-toT.X, -toT.Z)
+                    local pitch = math.asin(math.clamp(toT.Y, -1, 1))
+                    applyBodyAimYawPitch(yaw, pitch)
+                end
+            end
+        end)
+    end
+)
+
+print("[CLIENT] CIGARETTE V3.3 loaded (팀체크/ESP/Aim 전면 방어)")
