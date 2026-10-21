@@ -1,10 +1,12 @@
 --========================================================================
---  Roblox Client - CIGARETTE V3.3.1 (Fixed & CoreGui Crash Patched)
---  - Fixed: isSelf() logic (was returning true for everyone)
---  - Fixed: __namecall hooks double-calling and breaking CoreGui
+--  Roblox Client - CIGARETTE V3.3.1 (Full Fixed Version)
+--  - Fixed: CoreGui crash (__namecall hooks patched)
+--  - Fixed: loadstring nil error in selfRequeue (/script)
+--  - Fixed: loadstring nil error in /pending_script loop
+--  - Fixed: isSelf() logic returning true for everyone
 --  - Fixed: Camera reference updating dynamically
 --  - Fixed: Reload fallback (zombie state)
---  - Fixed: Unused humanize offsets and dead configs
+--  - Fixed: Unused humanize offsets now applied
 --========================================================================
 
 local HTTP_HOST = "http://127.0.0.1:2026"
@@ -28,12 +30,23 @@ getgenv()._cigar_stop = function() _my_stop = true end
 
 local LOADER_URL = HTTP_HOST .. "/script"
 
+-- [FIX] /script 엔드포인트 반환값이 nil일 때 loadstring 크래시 방지
 local function selfRequeue()
-    local code = string.format('loadstring(game:HttpGet("%s"))()', LOADER_URL)
-    if queue_on_teleport then return pcall(queue_on_teleport, code) end
-    if queueonteleport then return pcall(queueonteleport, code) end
-    if syn and syn.queue_on_teleport then return pcall(syn.queue_on_teleport, code) end
-    if fluxus and fluxus.queue_on_teleport then return pcall(fluxus.queue_on_teleport, code) end
+    local code = string.format([[
+        local url = "%s"
+        local src = game:HttpGet(url)
+        if type(src) == "string" and #src > 5 then
+            local fn = loadstring(src)
+            if fn then pcall(fn) end
+        else
+            warn("[CIGAR] Requeue failed: /script returned nil or empty")
+        end
+    ]], LOADER_URL)
+    
+    if queue_on_teleport then pcall(queue_on_teleport, code); return true end
+    if queueonteleport then pcall(queueonteleport, code); return true end
+    if syn and syn.queue_on_teleport then pcall(syn.queue_on_teleport, code); return true end
+    if fluxus and fluxus.queue_on_teleport then pcall(fluxus.queue_on_teleport, code); return true end
     return false
 end
 
@@ -154,7 +167,6 @@ local function isVisible(part)
             part.Position - cam.CFrame.Position, _rayParams)
         return hit == nil or hit.Instance:IsDescendantOf(part.Parent)
     end)
-    -- Fix: 에러 발생 시 false 반환 (벽 뒤 적 타겟팅 방지)
     return ok and res or false
 end
 
@@ -164,7 +176,6 @@ local function isSelf(plr)
     if not me then return true end
     if plr == me or plr.UserId == me.UserId then return true end
     
-    -- Fix: pcall의 반환값을 제대로 캡처하여 본인 여부 확인
     local ok, result = pcall(function()
         if plr.Character and me.Character then
             if plr.Character == me.Character then return true end
@@ -360,7 +371,6 @@ end
 
 local function cframeToYawPitch(cf)
     local look = cf.LookVector
-    -- Fix: math.atan2 deprecated, use math.atan(y, x)
     return math.atan(-look.X, -look.Z), math.asin(math.clamp(look.Y, -1, 1))
 end
 
@@ -574,14 +584,11 @@ local function trySetupSilentAim()
         mt.__namecall = newcclosure(function(self, ...)
             if _my_stop then return oldNamecall(self, ...) end
             
-            -- Fix: CoreGui 하위 객체에 대한 호출은 훅을 타지 않도록 원본 반환 (크래시 방지)
             if typeof(self) == "Instance" and self:IsDescendantOf(CoreGui) then
                 return oldNamecall(self, ...)
             end
 
             local method = getnamecallmethod()
-            
-            -- Fix: 무조건 pcall로 감싸서 반환값을 잃어버리던 로직 수정
             if AIM.silent_enabled and
                (method == "FireServer" or method == "InvokeServer") and
                typeof(self) == "Instance" and
@@ -640,7 +647,6 @@ local function trySetupSilentAim()
                     end
                 end
                 
-                -- Fix: 수정되었을 때만 oldNamecall을 호출하여 반환
                 if modified then
                     return oldNamecall(self, table.unpack(args))
                 end
@@ -673,7 +679,6 @@ local function trySetupAutoHead()
         mt.__namecall = newcclosure(function(self, ...)
             if _my_stop then return oldNamecall(self, ...) end
             
-            -- Fix: CoreGui 보호
             if typeof(self) == "Instance" and self:IsDescendantOf(CoreGui) then
                 return oldNamecall(self, ...)
             end
@@ -986,9 +991,8 @@ task.spawn(function()
                         end
                     end
                 end
-                -- Fix: 팀 체크 활성화/비활성화 동기화
-                if data.team_check ~= nil then TEAM_CHECK = not not data.team_check end
                 
+                if data.team_check ~= nil then TEAM_CHECK = not not data.team_check end
                 if data.hitbox_on ~= nil then CFG.HITBOX_ON = not not data.hitbox_on end
                 if data.hitbox_scale then CFG.HITBOX_SCALE = tonumber(data.hitbox_scale) or CFG.HITBOX_SCALE end
                 if data.head_expand_enabled ~= nil then
@@ -1016,22 +1020,24 @@ task.spawn(function()
     end
 end)
 
+-- [FIX] /pending_script 반환값이 nil이거나 loadstring 실패 시 크래시 방지
 task.spawn(function()
     while task.wait(1) do
         if _my_stop then return end
         local ok, res = pcall(function()
             return http_request({ Url = HTTP_HOST .. "/pending_script", Method = "GET" })
         end)
-        if ok and res and res.Body and #res.Body > 5 then
+        
+        if ok and res and type(res.Body) == "string" and #res.Body > 5 then
             local src = res.Body
-            local fn, err = loadstring(src)
-            if fn then 
+            local success, fnOrErr = pcall(function() return loadstring(src) end)
+            
+            if success and type(fnOrErr) == "function" then
                 _my_stop = true
                 task.wait(0.1)
-                pcall(fn)
+                pcall(fnOrErr)
             else
-                -- Fix: 로드 실패 시 클라이언트가 죽지 않도록 롤백
-                warn("[CIGAR reload] " .. tostring(err) .. " (Keeping old script alive)")
+                warn("[CIGAR reload] loadstring failed: " .. tostring(fnOrErr) .. " (Keeping old script alive)")
             end
             return
         end
@@ -1061,7 +1067,6 @@ RunService:BindToRenderStep("CigarAimCamera",
     function(dt)
         if _my_stop then return end
         pcall(function()
-            -- Fix: Camera 참조 매 프레임 갱신
             local cam = Workspace.CurrentCamera
             if not cam then return end
 
@@ -1152,7 +1157,6 @@ RunService:BindToRenderStep("CigarAimCamera",
                 moveX = dx * baseFactor * curve * speedMult
                 moveY = dy * baseFactor * curve * speedMult
 
-                -- Fix: 누락되었던 Human.aim_offset 적용
                 moveX = moveX + (Human.aim_offset.X * 100)
                 moveY = moveY + (Human.aim_offset.Y * 100)
 
@@ -1213,4 +1217,4 @@ RunService:BindToRenderStep("CigarAimCamera",
     end
 )
 
-print("[CLIENT] CIGARETTE V3.3.1 loaded (CoreGui Crash Patched)")
+print("[CLIENT] CIGARETTE V3.3.1 loaded (Full Patches Applied)")
