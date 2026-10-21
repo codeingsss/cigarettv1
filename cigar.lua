@@ -1,8 +1,10 @@
 --========================================================================
---  Roblox Client - CIGARETTE V3.3.1 (Full 1100 Lines Original + Anti-Crash)
---  - All features restored (Silent, AutoHead, BodyAim, Humanize)
---  - Korean translated to English
---  - __namecall hooks are now safely wrapped to prevent CoreGui crash
+--  Roblox Client - CIGARETTE V3.3.1 (Fixed & CoreGui Crash Patched)
+--  - Fixed: isSelf() logic (was returning true for everyone)
+--  - Fixed: __namecall hooks double-calling and breaking CoreGui
+--  - Fixed: Camera reference updating dynamically
+--  - Fixed: Reload fallback (zombie state)
+--  - Fixed: Unused humanize offsets and dead configs
 --========================================================================
 
 local HTTP_HOST = "http://127.0.0.1:2026"
@@ -28,10 +30,10 @@ local LOADER_URL = HTTP_HOST .. "/script"
 
 local function selfRequeue()
     local code = string.format('loadstring(game:HttpGet("%s"))()', LOADER_URL)
-    if queue_on_teleport then pcall(queue_on_teleport, code); return true end
-    if queueonteleport then pcall(queueonteleport, code); return true end
-    if syn and syn.queue_on_teleport then pcall(syn.queue_on_teleport, code); return true end
-    if fluxus and fluxus.queue_on_teleport then pcall(fluxus.queue_on_teleport, code); return true end
+    if queue_on_teleport then return pcall(queue_on_teleport, code) end
+    if queueonteleport then return pcall(queueonteleport, code) end
+    if syn and syn.queue_on_teleport then return pcall(syn.queue_on_teleport, code) end
+    if fluxus and fluxus.queue_on_teleport then return pcall(fluxus.queue_on_teleport, code) end
     return false
 end
 
@@ -42,12 +44,12 @@ local Workspace   = game:GetService("Workspace")
 local RunService  = game:GetService("RunService")
 local UIS         = game:GetService("UserInputService")
 local HttpService = game:GetService("HttpService")
+local CoreGui     = game:GetService("CoreGui") -- CoreGui 참조 추가
 
 local LocalPlayer = Players.LocalPlayer
-local Camera      = Workspace.CurrentCamera
 
--- ★★★ CRASH PREVENTION SWITCH ★★★
--- Set to false to disable Silent Aim and AutoHead hooks completely (Prevents CoreGui crash)
+-- ★★★ CORE GUI CRASH PREVENTION ★★★
+-- true로 바꾸면 실험해볼 수 있으나, CoreGui 크래시 방지 로직이 포함되어 있음
 local ENABLE_NAME_CALL_HOOKS = false 
 
 local CFG = {
@@ -131,7 +133,9 @@ end
 --  Utils
 --========================================================================
 local function worldToScreen(worldPos)
-    local sp = Camera:WorldToViewportPoint(worldPos)
+    local cam = Workspace.CurrentCamera
+    if not cam then return nil end
+    local sp = cam:WorldToViewportPoint(worldPos)
     if sp.Z <= 0 then return nil end
     return { x = math.floor(sp.X), y = math.floor(sp.Y) }
 end
@@ -141,14 +145,17 @@ _rayParams.FilterType = Enum.RaycastFilterType.Exclude
 
 local function isVisible(part)
     if not AIM.visible then return true end
+    local cam = Workspace.CurrentCamera
+    if not cam then return false end
     local ok, res = pcall(function()
         local myChar = LocalPlayer and LocalPlayer.Character
-        _rayParams.FilterDescendantsInstances = myChar and { myChar, Camera } or { Camera }
-        local hit = Workspace:Raycast(Camera.CFrame.Position,
-            part.Position - Camera.CFrame.Position, _rayParams)
+        _rayParams.FilterDescendantsInstances = myChar and { myChar, cam } or { cam }
+        local hit = Workspace:Raycast(cam.CFrame.Position,
+            part.Position - cam.CFrame.Position, _rayParams)
         return hit == nil or hit.Instance:IsDescendantOf(part.Parent)
     end)
-    return ok and res or true
+    -- Fix: 에러 발생 시 false 반환 (벽 뒤 적 타겟팅 방지)
+    return ok and res or false
 end
 
 local function isSelf(plr)
@@ -156,14 +163,17 @@ local function isSelf(plr)
     local me = LocalPlayer
     if not me then return true end
     if plr == me or plr.UserId == me.UserId then return true end
-    local ok = pcall(function()
+    
+    -- Fix: pcall의 반환값을 제대로 캡처하여 본인 여부 확인
+    local ok, result = pcall(function()
         if plr.Character and me.Character then
             if plr.Character == me.Character then return true end
             if plr.Character:IsDescendantOf(me.Character) then return true end
             if me.Character:IsDescendantOf(plr.Character) then return true end
         end
+        return false
     end)
-    return ok and true or false
+    return ok and result or false
 end
 
 --========================================================================
@@ -350,7 +360,8 @@ end
 
 local function cframeToYawPitch(cf)
     local look = cf.LookVector
-    return math.atan2(-look.X, -look.Z), math.asin(math.clamp(look.Y, -1, 1))
+    -- Fix: math.atan2 deprecated, use math.atan(y, x)
+    return math.atan(-look.X, -look.Z), math.asin(math.clamp(look.Y, -1, 1))
 end
 
 local function normalizeAngle(a)
@@ -360,8 +371,10 @@ local function normalizeAngle(a)
 end
 
 local function screenAngle(worldPos)
-    local camPos = Camera.CFrame.Position
-    local camDir = Camera.CFrame.LookVector
+    local cam = Workspace.CurrentCamera
+    if not cam then return 999 end
+    local camPos = cam.CFrame.Position
+    local camDir = cam.CFrame.LookVector
     local toT = worldPos - camPos
     if toT.Magnitude < 0.001 then return 0 end
     return math.deg(math.acos(math.clamp(camDir:Dot(toT.Unit), -1, 1)))
@@ -486,18 +499,23 @@ local function pickTarget(fov, maxDist, minDist, useBone, prefer)
     if prefer and prefer.Parent and not isMyPart(prefer) then
         local hum = prefer.Parent:FindFirstChildOfClass("Humanoid")
         if hum and hum.Health > 0 then
-            local dist = (prefer.Position - Camera.CFrame.Position).Magnitude
-            if dist >= (minDist or 2.5) and dist <= maxDist and isVisible(prefer) then
-                local ang = screenAngle(prefer.Position)
-                if ang <= fov then
-                    return prefer
+            local cam = Workspace.CurrentCamera
+            if cam then
+                local dist = (prefer.Position - cam.CFrame.Position).Magnitude
+                if dist >= (minDist or 2.5) and dist <= maxDist and isVisible(prefer) then
+                    local ang = screenAngle(prefer.Position)
+                    if ang <= fov then
+                        return prefer
+                    end
                 end
             end
         end
     end
 
     local best, bestScore = nil, math.huge
-    local camPos = Camera.CFrame.Position
+    local cam = Workspace.CurrentCamera
+    if not cam then return nil end
+    local camPos = cam.CFrame.Position
     local myChar = LocalPlayer and LocalPlayer.Character
     for _, plr in ipairs(Players:GetPlayers()) do
         if isValidAimTarget(plr) and plr.Character and plr.Character ~= myChar then
@@ -539,10 +557,8 @@ local function blendDirection(origDir, targetPos, originPos, strength)
 end
 
 --========================================================================
---  SILENT hook (Safely Disabled to prevent CoreGui crash)
+--  SILENT hook (CoreGui Crash Patched)
 --========================================================================
-local silentHitCount = 0
-
 local function trySetupSilentAim()
     if not ENABLE_NAME_CALL_HOOKS then return false end
     if not (getrawmetatable and setreadonly and newcclosure and getnamecallmethod) then
@@ -557,43 +573,31 @@ local function trySetupSilentAim()
         setreadonly(mt, false)
         mt.__namecall = newcclosure(function(self, ...)
             if _my_stop then return oldNamecall(self, ...) end
-            local okH, errH = pcall(function()
-                local method = getnamecallmethod()
-                if AIM.silent_enabled and
-                   (method == "FireServer" or method == "InvokeServer") and
-                   typeof(self) == "Instance" and
-                   (self:IsA("RemoteEvent") or self:IsA("RemoteFunction")) then
-                    local args = {...}
-                    for i = 1, math.min(5, #args) do
-                        local a = args[i]
-                        if typeof(a) == "Vector3" then
-                            if a.Magnitude > 0.001 then
-                                local t = pickSilentTarget()
-                                if t then
-                                    local o = Camera.CFrame.Position
-                                    local strength = AIM.silent_strength or 0.5
-                                    strength = strength * math.clamp(AIM.silent_smooth or 1.0, 0.05, 1.0)
-                                    local adjTarget = t.Position
-                                    if AIM.silent_humanize then
-                                        local missAmt = (1 - math.clamp(AIM.silent_smooth or 1.0, 0.1, 1.0))
-                                                        * 2.5 * (AIM.humanize_level or 1.0)
-                                        adjTarget = t.Position + Vector3.new(
-                                            (math.random() - 0.5) * missAmt,
-                                            (math.random() - 0.5) * missAmt,
-                                            (math.random() - 0.5) * missAmt)
-                                        strength = math.clamp(
-                                            strength + math.noise(tick() * 1.3, 0) * 0.05 * (AIM.humanize_level or 1.0),
-                                            0.02, 1.0)
-                                    end
-                                    local blended = blendDirection(a.Unit, adjTarget, o, strength)
-                                    args[i] = blended * a.Magnitude
-                                    silentHitCount = silentHitCount + 1
-                                end
-                            end
-                            break
-                        elseif typeof(a) == "CFrame" then
+            
+            -- Fix: CoreGui 하위 객체에 대한 호출은 훅을 타지 않도록 원본 반환 (크래시 방지)
+            if typeof(self) == "Instance" and self:IsDescendantOf(CoreGui) then
+                return oldNamecall(self, ...)
+            end
+
+            local method = getnamecallmethod()
+            
+            -- Fix: 무조건 pcall로 감싸서 반환값을 잃어버리던 로직 수정
+            if AIM.silent_enabled and
+               (method == "FireServer" or method == "InvokeServer") and
+               typeof(self) == "Instance" and
+               (self:IsA("RemoteEvent") or self:IsA("RemoteFunction")) then
+                
+                local args = {...}
+                local modified = false
+                
+                for i = 1, math.min(5, #args) do
+                    local a = args[i]
+                    if typeof(a) == "Vector3" then
+                        if a.Magnitude > 0.001 then
                             local t = pickSilentTarget()
                             if t then
+                                local cam = Workspace.CurrentCamera
+                                local o = cam and cam.CFrame.Position or Vector3.new()
                                 local strength = AIM.silent_strength or 0.5
                                 strength = strength * math.clamp(AIM.silent_smooth or 1.0, 0.05, 1.0)
                                 local adjTarget = t.Position
@@ -604,19 +608,42 @@ local function trySetupSilentAim()
                                         (math.random() - 0.5) * missAmt,
                                         (math.random() - 0.5) * missAmt,
                                         (math.random() - 0.5) * missAmt)
+                                    strength = math.clamp(
+                                        strength + math.noise(tick() * 1.3, 0) * 0.05 * (AIM.humanize_level or 1.0),
+                                        0.05, 1.0)
                                 end
-                                local blended = blendDirection(a.LookVector, adjTarget, a.Position, strength)
-                                args[i] = CFrame.lookAt(a.Position, a.Position + blended)
-                                silentHitCount = silentHitCount + 1
+                                local blended = blendDirection(a.Unit, adjTarget, o, strength)
+                                args[i] = blended * a.Magnitude
+                                modified = true
                             end
-                            break
                         end
+                        break
+                    elseif typeof(a) == "CFrame" then
+                        local t = pickSilentTarget()
+                        if t then
+                            local strength = AIM.silent_strength or 0.5
+                            strength = strength * math.clamp(AIM.silent_smooth or 1.0, 0.05, 1.0)
+                            local adjTarget = t.Position
+                            if AIM.silent_humanize then
+                                local missAmt = (1 - math.clamp(AIM.silent_smooth or 1.0, 0.1, 1.0))
+                                                * 2.5 * (AIM.humanize_level or 1.0)
+                                adjTarget = t.Position + Vector3.new(
+                                    (math.random() - 0.5) * missAmt,
+                                    (math.random() - 0.5) * missAmt,
+                                    (math.random() - 0.5) * missAmt)
+                            end
+                            local blended = blendDirection(a.LookVector, adjTarget, a.Position, strength)
+                            args[i] = CFrame.lookAt(a.Position, a.Position + blended)
+                            modified = true
+                        end
+                        break
                     end
+                end
+                
+                -- Fix: 수정되었을 때만 oldNamecall을 호출하여 반환
+                if modified then
                     return oldNamecall(self, table.unpack(args))
                 end
-            end)
-            if not okH then
-                warn("[SILENT] hook error: " .. tostring(errH))
             end
             return oldNamecall(self, ...)
         end)
@@ -629,7 +656,7 @@ end
 trySetupSilentAim()
 
 --========================================================================
---  AUTOHEAD hook (Safely Disabled to prevent CoreGui crash)
+--  AUTOHEAD hook (CoreGui Crash Patched)
 --========================================================================
 local function trySetupAutoHead()
     if not ENABLE_NAME_CALL_HOOKS then return false end
@@ -645,59 +672,64 @@ local function trySetupAutoHead()
         setreadonly(mt, false)
         mt.__namecall = newcclosure(function(self, ...)
             if _my_stop then return oldNamecall(self, ...) end
-            local okH = pcall(function()
-                local method = getnamecallmethod()
-                if AIM.autohead_enabled and self == Workspace then
-                    local isRay = (method == "Raycast" or
-                        method == "FindPartOnRay" or
-                        method == "FindPartOnRayWithIgnoreList" or
-                        method == "FindPartOnRayWithWhitelist")
-                    if isRay then
-                        local args = {...}
-                        local originV, dirV
-                        if method == "Raycast" then
-                            if typeof(args[1]) == "Vector3" and typeof(args[2]) == "Vector3" then
-                                originV, dirV = args[1], args[2]
-                            end
-                        else
-                            if typeof(args[1]) == "Ray" then
-                                originV, dirV = args[1].Origin, args[1].Direction
-                            end
+            
+            -- Fix: CoreGui 보호
+            if typeof(self) == "Instance" and self:IsDescendantOf(CoreGui) then
+                return oldNamecall(self, ...)
+            end
+
+            local method = getnamecallmethod()
+            if AIM.autohead_enabled and self == Workspace then
+                local isRay = (method == "Raycast" or
+                    method == "FindPartOnRay" or
+                    method == "FindPartOnRayWithIgnoreList" or
+                    method == "FindPartOnRayWithWhitelist")
+                if isRay then
+                    local args = {...}
+                    local originV, dirV
+                    if method == "Raycast" then
+                        if typeof(args[1]) == "Vector3" and typeof(args[2]) == "Vector3" then
+                            originV, dirV = args[1], args[2]
                         end
-                        if originV and dirV then
-                            local results = {oldNamecall(self, ...)}
-                            local r = results[1]
-                            local hit = typeof(r) == "RaycastResult" and r.Instance
-                                     or (typeof(r) == "Instance" and r or nil)
-                            if hit then
-                                local char = hit:FindFirstAncestorOfClass("Model")
-                                local plr = char and Players:GetPlayerFromCharacter(char)
-                                if plr and isValidAimTarget(plr) then
-                                    local head = char:FindFirstChild("Head")
-                                    if head and hit ~= head
-                                       and head:IsDescendantOf(char)
-                                       and hit:IsDescendantOf(char) then
-                                        local nd = (head.Position - originV)
-                                        if nd.Magnitude > 0.001 then
-                                            nd = nd.Unit * dirV.Magnitude
-                                            local na
-                                            if method == "Raycast" then
-                                                na = {originV, nd}
-                                                for i = 3, #args do na[i] = args[i] end
-                                            else
-                                                na = {Ray.new(originV, nd)}
-                                                for i = 2, #args do na[i] = args[i] end
-                                            end
-                                            return oldNamecall(self, table.unpack(na))
+                    else
+                        if typeof(args[1]) == "Ray" then
+                            originV, dirV = args[1].Origin, args[1].Direction
+                        end
+                    end
+                    
+                    if originV and dirV then
+                        local results = {oldNamecall(self, ...)}
+                        local r = results[1]
+                        local hit = typeof(r) == "RaycastResult" and r.Instance
+                                 or (typeof(r) == "Instance" and r or nil)
+                        if hit then
+                            local char = hit:FindFirstAncestorOfClass("Model")
+                            local plr = char and Players:GetPlayerFromCharacter(char)
+                            if plr and isValidAimTarget(plr) then
+                                local head = char:FindFirstChild("Head")
+                                if head and hit ~= head
+                                   and head:IsDescendantOf(char)
+                                   and hit:IsDescendantOf(char) then
+                                    local nd = (head.Position - originV)
+                                    if nd.Magnitude > 0.001 then
+                                        nd = nd.Unit * dirV.Magnitude
+                                        local na
+                                        if method == "Raycast" then
+                                            na = {originV, nd}
+                                            for i = 3, #args do na[i] = args[i] end
+                                        else
+                                            na = {Ray.new(originV, nd)}
+                                            for i = 2, #args do na[i] = args[i] end
                                         end
+                                        return oldNamecall(self, table.unpack(na))
                                     end
                                 end
                             end
-                            return table.unpack(results)
                         end
+                        return table.unpack(results)
                     end
                 end
-            end)
+            end
             return oldNamecall(self, ...)
         end)
         setreadonly(mt, true)
@@ -849,7 +881,9 @@ end)
 local function collectESP()
     local list = {}
     local ok, res = pcall(function()
-        local myPos = Camera.CFrame.Position
+        local cam = Workspace.CurrentCamera
+        if not cam then return list end
+        local myPos = cam.CFrame.Position
         for _, plr in ipairs(Players:GetPlayers()) do
             if not isSelf(plr) and plr.Character then
                 local hrp = plr.Character:FindFirstChild("HumanoidRootPart")
@@ -942,7 +976,7 @@ task.spawn(function()
             local okj, data = pcall(function() return HttpService:JSONDecode(res.Body) end)
             if okj and type(data) == "table" then
                 for k, v in pairs(data) do
-                    if k ~= "team_check" and AIM[k] ~= nil then
+                    if AIM[k] ~= nil then
                         if NUM_KEYS[k] then
                             local n = tonumber(v); if n then AIM[k] = n end
                         elseif BOOL_KEYS[k] then
@@ -952,6 +986,9 @@ task.spawn(function()
                         end
                     end
                 end
+                -- Fix: 팀 체크 활성화/비활성화 동기화
+                if data.team_check ~= nil then TEAM_CHECK = not not data.team_check end
+                
                 if data.hitbox_on ~= nil then CFG.HITBOX_ON = not not data.hitbox_on end
                 if data.hitbox_scale then CFG.HITBOX_SCALE = tonumber(data.hitbox_scale) or CFG.HITBOX_SCALE end
                 if data.head_expand_enabled ~= nil then
@@ -987,13 +1024,14 @@ task.spawn(function()
         end)
         if ok and res and res.Body and #res.Body > 5 then
             local src = res.Body
-            _my_stop = true
-            task.wait(0.1)
             local fn, err = loadstring(src)
-            if fn then pcall(fn)
+            if fn then 
+                _my_stop = true
+                task.wait(0.1)
+                pcall(fn)
             else
-                warn("[CIGAR reload] " .. tostring(err))
-                if getgenv()._cigar_stop then getgenv()._cigar_stop = nil end
+                -- Fix: 로드 실패 시 클라이언트가 죽지 않도록 롤백
+                warn("[CIGAR reload] " .. tostring(err) .. " (Keeping old script alive)")
             end
             return
         end
@@ -1023,6 +1061,10 @@ RunService:BindToRenderStep("CigarAimCamera",
     function(dt)
         if _my_stop then return end
         pcall(function()
+            -- Fix: Camera 참조 매 프레임 갱신
+            local cam = Workspace.CurrentCamera
+            if not cam then return end
+
             local lockActive   = AIM.lock_enabled
             local assistActive = AIM.assist_enabled
 
@@ -1051,9 +1093,9 @@ RunService:BindToRenderStep("CigarAimCamera",
             local newTarget = pickTarget(useFov, useDist, AIM.minTargetDist, nil, currentTarget)
 
             if newTarget and newTarget ~= currentTarget then
-                local sp = Camera:WorldToViewportPoint(newTarget.Position)
+                local sp = cam:WorldToViewportPoint(newTarget.Position)
                 if sp.Z > 0 then
-                    local vpX, vpY = Camera.ViewportSize.X, Camera.ViewportSize.Y
+                    local vpX, vpY = cam.ViewportSize.X, cam.ViewportSize.Y
                     local dx = sp.X - vpX * 0.5
                     local dy = sp.Y - vpY * 0.5
                     local distPx = math.sqrt(dx*dx + dy*dy)
@@ -1086,11 +1128,11 @@ RunService:BindToRenderStep("CigarAimCamera",
                 if head then targetPos = head.Position end
             end
 
-            local screenPos = Camera:WorldToViewportPoint(targetPos)
+            local screenPos = cam:WorldToViewportPoint(targetPos)
             if screenPos.Z <= 0 then return end
 
-            local vpX = Camera.ViewportSize.X
-            local vpY = Camera.ViewportSize.Y
+            local vpX = cam.ViewportSize.X
+            local vpY = cam.ViewportSize.Y
             local dx = screenPos.X - vpX * 0.5
             local dy = screenPos.Y - vpY * 0.5
             local distPx = math.sqrt(dx*dx + dy*dy)
@@ -1109,6 +1151,10 @@ RunService:BindToRenderStep("CigarAimCamera",
                 local baseFactor = (lockActive and 0.42 or 0.32) * AIM.humanize_level
                 moveX = dx * baseFactor * curve * speedMult
                 moveY = dy * baseFactor * curve * speedMult
+
+                -- Fix: 누락되었던 Human.aim_offset 적용
+                moveX = moveX + (Human.aim_offset.X * 100)
+                moveY = moveY + (Human.aim_offset.Y * 100)
 
                 if Human.overshoot_active then
                     Human.overshoot_t = Human.overshoot_t + dt
@@ -1155,10 +1201,10 @@ RunService:BindToRenderStep("CigarAimCamera",
             end
 
             if AIM.body_aim then
-                local toT = targetPos - Camera.CFrame.Position
+                local toT = targetPos - cam.CFrame.Position
                 if toT.Magnitude > 0.01 then
                     toT = toT.Unit
-                    local yaw = math.atan2(-toT.X, -toT.Z)
+                    local yaw = math.atan(-toT.X, -toT.Z)
                     local pitch = math.asin(math.clamp(toT.Y, -1, 1))
                     applyBodyAimYawPitch(yaw, pitch)
                 end
@@ -1167,4 +1213,4 @@ RunService:BindToRenderStep("CigarAimCamera",
     end
 )
 
-print("[CLIENT] CIGARETTE V3.3.1 loaded (Full features active)")
+print("[CLIENT] CIGARETTE V3.3.1 loaded (CoreGui Crash Patched)")
